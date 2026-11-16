@@ -1,466 +1,1964 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ançã Futebol Clube | Site Oficial</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <title>Ançã Futebol Clube | Portal Oficial Alviverde</title>
+    <meta name="description" content="Site oficial multi-página do Ançã Futebol Clube. Navegue autonomamente por Clube, Futebol & Formação, Sócios & Bilheteira, Loja Oficial, Notícias e Pagamentos Online.">
 
-    <!-- CABEÇALHO & MENU INTERATIVO -->
-    <header class="header">
-        <div class="top-bar">
-            <div class="container top-bar-flex">
-                <div class="top-info">
-                    <span><i class="fa-solid fa-location-dot"></i> Parque Desportivo de Ançã, Cantanhede</span>
-                    <span><i class="fa-solid fa-envelope"></i> geral@ancafc.pt</span>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        anca: {
+                            dark: '#02301B',
+                            deep: '#034728',
+                            green: '#007A43',
+                            primary: '#046A38',
+                            vibrant: '#10B981',
+                            bright: '#009954',
+                            light: '#E6F4ED',
+                            offwhite: '#F4F9F6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Padrões Alviverdes e Estética Institucional */
+        .hero-bg {
+            background-image: linear-gradient(125deg, rgba(2, 48, 27, 0.96) 0%, rgba(3, 71, 40, 0.90) 55%, rgba(0, 122, 67, 0.84) 100%),
+                              url('https://images.unsplash.com/photo-1518605368461-1ee7e1611145?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .alviverde-stripes {
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.035) 0px,
+                rgba(255, 255, 255, 0.035) 36px,
+                transparent 36px,
+                transparent 72px
+            );
+        }
+
+        .alviverde-stripes-light {
+            background-color: #F4F9F6;
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(0, 122, 67, 0.03) 0px,
+                rgba(0, 122, 67, 0.03) 44px,
+                rgba(255, 255, 255, 0.65) 44px,
+                rgba(255, 255, 255, 0.65) 88px
+            );
+        }
+
+        .pitch-pattern {
+            background-color: #02301B;
+            background-image:
+                repeating-linear-gradient(90deg, rgba(0, 122, 67, 0.14) 0px, rgba(0, 122, 67, 0.14) 48px, transparent 48px, transparent 96px),
+                radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px);
+            background-size: 96px 100%, 24px 24px;
+        }
+
+        .member-card {
+            background: linear-gradient(135deg, #02301B 0%, #007A43 55%, #034728 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .member-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.06) 0px,
+                rgba(255, 255, 255, 0.06) 22px,
+                transparent 22px,
+                transparent 44px
+            );
+            pointer-events: none;
+        }
+
+        /* Transição suave entre páginas */
+        .page-view {
+            display: none;
+            animation: pageFadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilo de link ativo na barra de navegação */
+        .nav-link.active-nav {
+            background-color: #007A43;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(0, 122, 67, 0.35);
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #02301B; }
+        ::-webkit-scrollbar-thumb { background: #007A43; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10B981; }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-anca-offwhite antialiased selection:bg-anca-green selection:text-white overflow-x-hidden flex flex-col min-h-screen">
+
+    <!-- Definição Global Reutilizável do Emblema Oficial do Ançã FC -->
+    <svg class="hidden" aria-hidden="true">
+        <defs>
+            <g id="anca-official-crest">
+                <!-- Coroa Heráldica Superior -->
+                <g fill="#FFFFFF" stroke="#007A43" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M100 18 C92 18, 88 26, 92 32 C84 32, 80 41, 86 48 C90 52, 96 51, 100 47 C104 51, 110 52, 114 48 C120 41, 116 32, 108 32 C112 26, 108 18, 100 18 Z"/>
+                    <path d="M68 35 C62 35, 60 41, 63 45 C58 46, 56 53, 61 57 C65 60, 72 58, 74 53 C77 48, 74 35, 68 35 Z"/>
+                    <path d="M132 35 C126 35, 123 48, 126 53 C128 58, 135 60, 139 57 C144 53, 142 46, 137 45 C140 41, 138 35, 132 35 Z"/>
+                    <path d="M26 54 C21 54, 18 60, 22 64 C28 66, 33 70, 36 78 L164 78 C167 70, 172 66, 178 64 C182 60, 179 54, 174 54 C162 54, 152 60, 146 66 C142 58, 136 54, 132 54 C126 54, 121 59, 118 65 C113 56, 106 49, 100 49 C94 49, 87 56, 82 65 C79 59, 74 54, 68 54 C64 54, 58 58, 54 66 C48 60, 38 54, 26 54 Z"/>
+                    <polygon points="100,56 93,65 107,65" fill="#FFFFFF" stroke="#007A43" stroke-width="3.5"/>
+                    <circle cx="69" cy="64" r="4.5" fill="#FFFFFF" stroke="#007A43" stroke-width="3.5"/>
+                    <circle cx="131" cy="64" r="4.5" fill="#FFFFFF" stroke="#007A43" stroke-width="3.5"/>
+                    <path d="M36 77 Q100 68 164 77 L160 88 Q100 79 40 88 Z"/>
+                    <path d="M40 86 Q100 77 160 86 L157 96 Q100 87 43 96 Z"/>
+                </g>
+                <!-- Escudo Clássico Arredondado -->
+                <path d="M46 105 L154 105 L154 166 C154 205, 130 230, 100 230 C70 230, 46 205, 46 166 Z"
+                      fill="#FFFFFF" stroke="#007A43" stroke-width="5.2" stroke-linejoin="round"/>
+                <path d="M53 111 L147 111 L147 165 C147 199, 126 222, 100 222 C74 222, 53 199, 53 165 Z"
+                      fill="#FFFFFF" stroke="#007A43" stroke-width="3.2" stroke-linejoin="round"/>
+                <!-- 6 Besantes Verdes -->
+                <g fill="#007A43">
+                    <circle cx="76" cy="133" r="10.5"/>
+                    <circle cx="76" cy="164" r="10.5"/>
+                    <circle cx="76" cy="195" r="10.5"/>
+                    <circle cx="124" cy="133" r="10.5"/>
+                    <circle cx="124" cy="164" r="10.5"/>
+                    <circle cx="124" cy="195" r="10.5"/>
+                </g>
+                <!-- Listel Central "A F C" -->
+                <g fill="#FFFFFF" stroke="#007A43" stroke-width="4.2" stroke-linejoin="round">
+                    <path d="M46 98 L28 112 L38 113 L35 123 L52 108 Z"/>
+                    <path d="M154 98 L172 112 L162 113 L165 123 L148 108 Z"/>
+                    <path d="M43 96 Q100 84 157 96 L154 111 Q100 99 46 111 Z"/>
+                </g>
+                <text x="100" y="102" font-family="Montserrat, Oswald, sans-serif" font-weight="800" font-size="13.5" fill="#007A43" text-anchor="middle" letter-spacing="4">A F C</text>
+            </g>
+        </defs>
+    </svg>
+
+    <!-- =====================================================================
+         BARRA DE NAVEGAÇÃO INTERATIVA MULTI-PÁGINA (FIXA NO TOPO)
+    ====================================================================== -->
+    <header class="sticky top-0 z-40 bg-anca-dark text-white shadow-xl border-b-4 border-anca-green">
+        <!-- Barra Superior Institucional -->
+        <div class="bg-anca-deep/90 border-b border-white/10 text-[11px] text-emerald-100/80 hidden md:block">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <span>Fundado em 1941 • Vila de Ançã, Cantanhede</span>
+                    <span class="text-white/25">|</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede" target="_blank" rel="noopener noreferrer" class="hover:text-anca-vibrant inline-flex items-center gap-1 transition-colors">
+                        <svg class="w-3.5 h-3.5 text-anca-vibrant" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        Campo Dr. Américo Couto (Google Maps)
+                    </a>
                 </div>
-                <div class="top-social">
-                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <div class="flex items-center gap-4">
+                    <button onclick="navigateTo('socios')" class="hover:text-white transition-colors cursor-pointer">Portal do Sócio</button>
+                    <span class="text-white/25">|</span>
+                    <button onclick="openCheckoutModal()" class="text-anca-vibrant hover:underline font-semibold cursor-pointer">Pagamentos Online (MB WAY / Multibanco / PayPal)</button>
                 </div>
             </div>
         </div>
-        <nav class="navbar">
-            <div class="container nav-container">
-                <a href="#" class="logo-link" onclick="switchView('inicio')">
-                    <div class="emblem-container">
-                        <svg viewBox="0 0 120 150" class="official-emblem" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M60 10 C45 10 35 25 35 25 C35 25 25 20 15 28 C5 36 12 50 12 50 C12 50 20 48 25 55 C30 62 25 72 25 72 C25 72 40 75 60 75 C80 75 95 72 95 72 C95 72 90 62 95 55 C100 48 108 50 108 50 C108 50 115 36 105 28 C95 20 85 25 85 25 C85 25 75 10 60 10 Z" fill="#007A43" stroke="#ffffff" stroke-width="2"/>
-                            <path d="M25 65 Q60 78 95 65 L95 82 C95 120 78 142 60 145 C42 142 25 120 25 82 Z" fill="#ffffff" stroke="#007A43" stroke-width="4"/>
-                            <path d="M32 75 Q60 86 88 75 L88 85 C88 116 74 135 60 138 C46 135 32 116 32 85 Z" fill="none" stroke="#007A43" stroke-width="1.5"/>
-                            <path d="M24 73 Q60 85 96 73" fill="none" stroke="#007A43" stroke-width="5"/>
-                            <text x="60" y="81" font-family="Montserrat" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">A F C</text>
-                            <circle cx="47" cy="98" r="6" fill="#007A43"/>
-                            <circle cx="73" cy="98" r="6" fill="#007A43"/>
-                            <circle cx="47" cy="112" r="6" fill="#007A43"/>
-                            <circle cx="73" cy="112" r="6" fill="#007A43"/>
-                            <circle cx="47" cy="126" r="6" fill="#007A43"/>
-                            <circle cx="73" cy="126" r="6" fill="#007A43"/>
+
+        <!-- Menu Principal -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-18 py-2.5">
+                <!-- Logótipo Oficial -->
+                <button onclick="navigateTo('inicio')" class="flex items-center gap-3 text-left group focus:outline-none cursor-pointer">
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white p-1 shadow-md ring-2 ring-anca-vibrant/60 flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105">
+                        <svg viewBox="0 0 200 245" class="w-full h-full">
+                            <use href="#anca-official-crest"/>
                         </svg>
                     </div>
-                    <div class="logo-text">
-                        <span class="club-title">Ançã F.C.</span>
-                        <span class="club-subtitle">Fundado em 1932</span>
+                    <div>
+                        <span class="block font-display font-bold text-xl sm:text-2xl tracking-wider text-white uppercase leading-none">Ançã FC</span>
+                        <span class="block text-[10px] sm:text-[11px] font-semibold text-anca-vibrant tracking-widest uppercase mt-0.5">Site Oficial • 1941</span>
                     </div>
-                </a>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#" class="nav-link active" data-target="inicio" onclick="switchView('inicio')"><i class="fa-solid fa-house"></i> Início</a></li>
-                    <li><a href="#" class="nav-link" data-target="clube" onclick="switchView('clube')"><i class="fa-solid fa-shield-halved"></i> O Clube</a></li>
-                    <li><a href="#" class="nav-link" data-target="futebol" onclick="switchView('futebol')"><i class="fa-solid fa-futbol"></i> Futebol & Formação</a></li>
-                    <li><a href="#" class="nav-link" data-target="socios" onclick="switchView('socios')"><i class="fa-solid fa-id-card"></i> Sócios & Bilheteira</a></li>
-                    <li><a href="#" class="nav-link" data-target="loja" onclick="switchView('loja')"><i class="fa-solid fa-store"></i> Loja Oficial</a></li>
-                    <li><a href="#" class="nav-link" data-target="noticias" onclick="switchView('noticias')"><i class="fa-solid fa-newspaper"></i> Notícias</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+                </button>
+
+                <!-- Links de Navegação Autónoma Desktop -->
+                <nav aria-label="Navegação Principal" class="hidden xl:flex items-center gap-1.5 bg-white/5 p-1.5 rounded-xl border border-white/10">
+                    <button data-page="inicio" onclick="navigateTo('inicio')" class="nav-link active-nav px-3.5 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                        Início
+                    </button>
+                    <button data-page="clube" onclick="navigateTo('clube')" class="nav-link px-3.5 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                        O Clube & História
+                    </button>
+                    <button data-page="futebol" onclick="navigateTo('futebol')" class="nav-link px-3.5 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                        Futebol & Formação
+                    </button>
+                    <button data-page="socios" onclick="navigateTo('socios')" class="nav-link px-3.5 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                        Sócios & Bilheteira
+                    </button>
+                    <button data-page="loja" onclick="navigateTo('loja')" class="nav-link px-3.5 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                        Loja Oficial
+                    </button>
+                    <button data-page="noticias" onclick="navigateTo('noticias')" class="nav-link px-3.5 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                        Notícias
+                    </button>
+                </nav>
+
+                <!-- Ações Rápidas: Carrinho / Checkout & Menu Mobile -->
+                <div class="flex items-center gap-2.5">
+                    <!-- Botão de Checkout / Carrinho -->
+                    <button onclick="openCheckoutModal()" class="relative inline-flex items-center gap-2 bg-white hover:bg-anca-light text-anca-green font-display font-bold uppercase tracking-wider text-xs sm:text-sm px-3.5 sm:px-4 py-2.5 rounded-xl shadow-lg transition-all cursor-pointer">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-anca-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                        <span class="hidden sm:inline">Pagamentos</span>
+                        <span id="cart-badge" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-anca-green text-white text-[11px] font-sans font-bold">
+                            0
+                        </span>
+                    </button>
+
+                    <!-- Botão Abrir Menu Mobile/Tablet -->
+                    <button id="mobile-drawer-btn" aria-label="Abrir Menu de Navegação" class="xl:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <!-- CONTEÚDO DINÂMICO DE VISTAS (SPA) -->
-    <main id="mainContent">
-        
-        <!-- VISTA: INÍCIO -->
-        <section id="view-inicio" class="view-section active">
-            <div class="hero-banner">
-                <div class="hero-overlay"></div>
-                <div class="container hero-content">
-                    <span class="hero-badge"><i class="fa-solid fa-star"></i> Orgãolhos Alviverdes da Beira Litoral</span>
-                    <h1>A Tradição e a Paixão<br><span>De Uma Vila, Um Clube!</span></h1>
-                    <p>Bem-vindo ao portal oficial do Ançã Futebol Clube. Acompanha a nossa equipa sénior, escalões de formação, sê sócio e veste as cores alviverdes.</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="switchView('socios')"><i class="fa-solid fa-user-plus"></i> Tornar-me Sócio</button>
-                        <button class="btn btn-outline" onclick="switchView('futebol')"><i class="fa-solid fa-calendar-days"></i> Próximo Jogo</button>
+    <!-- =====================================================================
+         DRAWER DE NAVEGAÇÃO LATERAL (MOBILE & TABLET)
+    ====================================================================== -->
+    <div id="mobile-drawer-overlay" onclick="closeMobileDrawer()" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden"></div>
+    <aside id="mobile-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] bg-anca-dark text-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between border-l-2 border-anca-green">
+        <div>
+            <div class="p-5 flex items-center justify-between border-b border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white p-1">
+                        <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
+                    </div>
+                    <div>
+                        <span class="block font-display font-bold text-lg uppercase">Ançã FC</span>
+                        <span class="block text-[10px] text-anca-vibrant uppercase tracking-widest">Menu de Navegação</span>
                     </div>
                 </div>
+                <button onclick="closeMobileDrawer()" class="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
 
-            <!-- MATCH CENTER DESTAQUE -->
-            <section class="section match-center-preview">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Próximo Encontro Oficial</h2>
-                        <p>Divisão de Elite Distrital AF Coimbra</p>
-                    </div>
-                    <div class="match-card-featured">
-                        <div class="match-meta">
-                            <span class="competition-tag">Campeonato Distrital</span>
-                            <span class="match-date"><i class="fa-regular fa-calendar"></i> Domingo, 22 Março | 15:00</span>
-                        </div>
-                        <div class="match-teams">
-                            <div class="team home">
-                                <div class="team-logo-placeholder"><i class="fa-solid fa-shield"></i></div>
-                                <h3>Ançã F.C.</h3>
+            <nav class="p-4 space-y-1.5">
+                <button data-page="inicio" onclick="navigateTo('inicio')" class="nav-link active-nav w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-heading font-bold uppercase tracking-wider text-left transition-colors cursor-pointer">
+                    <span>Início</span>
+                    <span>→</span>
+                </button>
+                <button data-page="clube" onclick="navigateTo('clube')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-heading font-bold uppercase tracking-wider text-left text-white/90 hover:bg-white/10 transition-colors cursor-pointer">
+                    <span>O Clube & História</span>
+                    <span>→</span>
+                </button>
+                <button data-page="futebol" onclick="navigateTo('futebol')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-heading font-bold uppercase tracking-wider text-left text-white/90 hover:bg-white/10 transition-colors cursor-pointer">
+                    <span>Futebol & Formação</span>
+                    <span>→</span>
+                </button>
+                <button data-page="socios" onclick="navigateTo('socios')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-heading font-bold uppercase tracking-wider text-left text-white/90 hover:bg-white/10 transition-colors cursor-pointer">
+                    <span>Sócios & Bilheteira</span>
+                    <span>→</span>
+                </button>
+                <button data-page="loja" onclick="navigateTo('loja')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-heading font-bold uppercase tracking-wider text-left text-white/90 hover:bg-white/10 transition-colors cursor-pointer">
+                    <span>Loja Oficial</span>
+                    <span>→</span>
+                </button>
+                <button data-page="noticias" onclick="navigateTo('noticias')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-heading font-bold uppercase tracking-wider text-left text-white/90 hover:bg-white/10 transition-colors cursor-pointer">
+                    <span>Notícias</span>
+                    <span>→</span>
+                </button>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-white/10 bg-anca-deep/50 space-y-2.5">
+            <button onclick="closeMobileDrawer(); openCheckoutModal();" class="w-full py-3 px-4 rounded-xl bg-anca-vibrant text-anca-dark font-display font-bold uppercase tracking-wider text-sm shadow-lg cursor-pointer">
+                Ir para Pagamentos / Checkout
+            </button>
+            <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-white/10 text-white text-xs font-semibold flex items-center justify-center gap-1.5">
+                <span>Localização do Estádio (Maps)</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- =====================================================================
+         CONTEÚDO PRINCIPAL (VISTAS INDEPENDENTES POR PÁGINA)
+    ====================================================================== -->
+    <main class="flex-grow">
+
+        <!-- ===============================================================
+             PÁGINA 1: INÍCIO
+        ================================================================ -->
+        <section id="page-inicio" class="page-view active">
+            <!-- Hero Principal -->
+            <div class="hero-bg relative py-14 sm:py-20 lg:py-24 overflow-hidden">
+                <div class="absolute inset-0 alviverde-stripes pointer-events-none"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <div class="lg:col-span-8">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-sm mb-5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-anca-vibrant animate-pulse"></span>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-white">Portal Oficial • Vila de Ançã, Cantanhede</span>
                             </div>
-                            <div class="match-vs">
-                                <span class="vs-badge">VS</span>
-                                <div class="countdown-timer" id="countdownTimer">
-                                    <div class="time-box"><span id="days">03</span><small>Dias</small></div>
-                                    <div class="time-box"><span id="hours">14</span><small>Horas</small></div>
-                                    <div class="time-box"><span id="mins">28</span><small>Min</small></div>
+
+                            <h1 class="font-display font-bold text-4xl sm:text-6xl text-white uppercase leading-[1.06] tracking-tight mb-5">
+                                Orgulho Alviverde no <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-anca-light to-anca-vibrant">Coração da Bairrada</span>
+                            </h1>
+
+                            <p class="text-base sm:text-lg text-emerald-50/90 leading-relaxed mb-8 max-w-2xl font-light">
+                                Bem-vindo à casa digital do Ançã Futebol Clube. Explore autonomamente a nossa história desde 1941, consulte o plantel e calendário, torne-se sócio ou adquira bilhetes e merchandising oficial com pagamento online rápido e seguro.
+                            </p>
+
+                            <!-- Atalhos Diretos para as Páginas -->
+                            <div class="flex flex-wrap gap-3.5">
+                                <button onclick="navigateTo('socios')" class="inline-flex items-center gap-2 bg-white hover:bg-anca-light text-anca-green font-display font-bold uppercase tracking-wider text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-xl transition-all cursor-pointer">
+                                    <span>Sócios & Bilheteira</span>
+                                    <span>→</span>
+                                </button>
+                                <button onclick="navigateTo('futebol')" class="inline-flex items-center gap-2 bg-anca-green/60 hover:bg-anca-green text-white border border-white/30 font-display font-semibold uppercase tracking-wider text-sm sm:text-base px-6 py-3.5 rounded-xl transition-all cursor-pointer">
+                                    <span>Plantel & Resultados</span>
+                                </button>
+                                <button onclick="navigateTo('loja')" class="inline-flex items-center gap-2 bg-anca-dark/70 hover:bg-anca-dark text-anca-vibrant border border-anca-vibrant/40 font-display font-semibold uppercase tracking-wider text-sm sm:text-base px-6 py-3.5 rounded-xl transition-all cursor-pointer">
+                                    <span>Loja Oficial</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Emblema Oficial -->
+                        <div class="lg:col-span-4 flex justify-center lg:justify-end">
+                            <div class="relative">
+                                <div class="absolute -inset-4 rounded-full bg-anca-vibrant/25 blur-2xl"></div>
+                                <div class="relative w-52 h-52 sm:w-64 sm:h-64 rounded-full bg-white p-6 shadow-2xl border-4 border-anca-green/20 flex items-center justify-center">
+                                    <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
                                 </div>
                             </div>
-                            <div class="team away">
-                                <div class="team-logo-placeholder"><i class="fa-solid fa-shield"></i></div>
-                                <h3>U.D. Tocha</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match Center & Acessos Rápidos -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 pb-16">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <!-- Cartão Próximo Encontro com Ligação Maps -->
+                    <div class="lg:col-span-7 bg-white rounded-2xl shadow-xl border border-emerald-100 overflow-hidden flex flex-col justify-between">
+                        <div class="bg-anca-dark px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 border-b-4 border-anca-green">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 bg-anca-vibrant text-anca-dark font-display font-bold text-xs uppercase rounded">Próximo Encontro</span>
+                                <span class="text-white/95 text-xs font-medium">Divisão de Honra AF Coimbra • Jornada 11</span>
+                            </div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center gap-1.5 text-emerald-200 hover:text-white text-xs font-semibold bg-white/10 hover:bg-anca-green px-3 py-1 rounded-full border border-white/15 transition-all">
+                                <svg class="w-3.5 h-3.5 text-anca-vibrant" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <span>Parque Desportivo de Ançã</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="grid grid-cols-3 items-center text-center gap-2">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border-2 border-anca-green/20 p-2 shadow-sm mb-2">
+                                        <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
+                                    </div>
+                                    <h2 class="font-display font-bold text-base sm:text-lg text-anca-dark uppercase">Ançã FC</h2>
+                                    <span class="text-[11px] text-anca-green font-semibold">Casa</span>
+                                </div>
+
+                                <div class="flex flex-col items-center">
+                                    <span class="font-display font-bold text-2xl sm:text-3xl text-slate-300">VS</span>
+                                    <span class="mt-1.5 px-3 py-1 bg-anca-light text-anca-green font-bold text-xs rounded-lg border border-anca-green/20">DOM, 15:00H</span>
+                                    <button onclick="addToCart('bilhete-j11', 'Bilhete Jogo: Ançã FC vs AD Nogueirense (Bancada Central)', 5.00, 'Bilheteira')" class="mt-2.5 px-3 py-1 bg-anca-green hover:bg-anca-deep text-white font-display font-bold text-[11px] uppercase tracking-wider rounded-lg shadow transition-colors cursor-pointer">
+                                        Comprar Bilhete (5€)
+                                    </button>
+                                </div>
+
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-anca-offwhite border border-slate-200 flex items-center justify-center p-2 shadow-sm mb-2">
+                                        <div class="w-12 h-12 rounded-full bg-slate-800 text-white font-display font-bold text-base flex items-center justify-center">ADN</div>
+                                    </div>
+                                    <h2 class="font-display font-bold text-base sm:text-lg text-slate-800 uppercase">AD Nogueirense</h2>
+                                    <span class="text-[11px] text-slate-500 font-medium">Visitante</span>
+                                </div>
+                            </div>
+
+                            <!-- Countdown -->
+                            <div class="mt-5 pt-4 border-t border-slate-100 grid grid-cols-4 gap-2 max-w-sm mx-auto text-center">
+                                <div class="bg-anca-dark text-white rounded-lg p-2">
+                                    <span id="cd-days" class="block font-display font-bold text-xl text-anca-vibrant">00</span>
+                                    <span class="text-[10px] uppercase text-emerald-100/70">Dias</span>
+                                </div>
+                                <div class="bg-anca-dark text-white rounded-lg p-2">
+                                    <span id="cd-hours" class="block font-display font-bold text-xl">00</span>
+                                    <span class="text-[10px] uppercase text-emerald-100/70">Horas</span>
+                                </div>
+                                <div class="bg-anca-dark text-white rounded-lg p-2">
+                                    <span id="cd-minutes" class="block font-display font-bold text-xl">00</span>
+                                    <span class="text-[10px] uppercase text-emerald-100/70">Min</span>
+                                </div>
+                                <div class="bg-anca-dark text-white rounded-lg p-2">
+                                    <span id="cd-seconds" class="block font-display font-bold text-xl text-anca-vibrant">00</span>
+                                    <span class="text-[10px] uppercase text-emerald-100/70">Seg</span>
+                                </div>
+                            </div>
+
+                            <!-- Barra de Localização GPS & Direções -->
+                            <div class="mt-5 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
+                                <div>
+                                    <strong class="text-anca-dark block">Campo Dr. Américo Couto • 3060-027 Ançã, Cantanhede</strong>
+                                    <span class="text-slate-500">Entrada gratuita para Sócios com quotas em dia.</span>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <button type="button" onclick="openMapModal()" class="px-3 py-1.5 rounded-lg bg-anca-offwhite hover:bg-anca-light text-anca-dark border border-emerald-200 font-semibold cursor-pointer">
+                                        Ver Mapa
+                                    </button>
+                                    <button type="button" onclick="copyStadiumAddress(this)" class="px-3 py-1.5 rounded-lg bg-anca-offwhite hover:bg-anca-light text-slate-700 border border-slate-200 font-semibold cursor-pointer">
+                                        <span class="copy-label">Copiar Morada</span>
+                                    </button>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase tracking-wider">
+                                        Como Chegar →
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="match-location-bar">
-                            <span><i class="fa-solid fa-location-dot"></i> <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="map-link">Parque Desportivo de Ançã (Campo Dr. Américo Couto)</a></span>
-                            <div class="match-actions">
-                                <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="btn btn-sm btn-outline"><i class="fa-solid fa-diamond-turn-right"></i> Direções GPS</a>
-                                <button class="btn btn-sm btn-primary" onclick="openTicketModal('Bilhete Jogo: Ançã FC vs UD Tocha', 6.00)"><i class="fa-solid fa-ticket"></i> Comprar Bilhete (6€)</button>
+                    </div>
+
+                    <!-- Cartão de Navegação Rápida por Áreas -->
+                    <div class="lg:col-span-5 bg-anca-dark text-white rounded-2xl shadow-xl border border-anca-green/40 p-6 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-anca-vibrant">Acesso Direto</span>
+                            <h2 class="font-display font-bold text-2xl uppercase mt-0.5 mb-4">Explore o Portal do Clube</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <button onclick="navigateTo('clube')" class="p-3.5 rounded-xl bg-white/5 hover:bg-anca-green/40 border border-white/10 text-left transition-all cursor-pointer group">
+                                    <span class="block font-display font-bold text-base uppercase text-white group-hover:text-anca-vibrant">O Clube & História</span>
+                                    <span class="block text-xs text-emerald-100/70 mt-0.5">Fundação 1941, Palmarés e Órgãos</span>
+                                </button>
+                                <button onclick="navigateTo('futebol')" class="p-3.5 rounded-xl bg-white/5 hover:bg-anca-green/40 border border-white/10 text-left transition-all cursor-pointer group">
+                                    <span class="block font-display font-bold text-base uppercase text-white group-hover:text-anca-vibrant">Futebol & Formação</span>
+                                    <span class="block text-xs text-emerald-100/70 mt-0.5">Plantel Sénior, Tabela e Escalões</span>
+                                </button>
+                                <button onclick="navigateTo('socios')" class="p-3.5 rounded-xl bg-white/5 hover:bg-anca-green/40 border border-white/10 text-left transition-all cursor-pointer group">
+                                    <span class="block font-display font-bold text-base uppercase text-white group-hover:text-anca-vibrant">Sócios & Bilheteira</span>
+                                    <span class="block text-xs text-emerald-100/70 mt-0.5">Quotas, Cartão Digital e Bilhetes</span>
+                                </button>
+                                <button onclick="navigateTo('loja')" class="p-3.5 rounded-xl bg-white/5 hover:bg-anca-green/40 border border-white/10 text-left transition-all cursor-pointer group">
+                                    <span class="block font-display font-bold text-base uppercase text-white group-hover:text-anca-vibrant">Loja Oficial</span>
+                                    <span class="block text-xs text-emerald-100/70 mt-0.5">Equipamentos 26/27 e Cachecóis</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <div class="text-xs text-emerald-100/80">
+                                <strong class="text-white block">Pagamentos Digitais Ativos</strong>
+                                <span>MB WAY, Multibanco, PayPal e Cartão</span>
+                            </div>
+                            <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl bg-anca-vibrant text-anca-dark font-display font-bold uppercase text-xs tracking-wider shadow cursor-pointer">
+                                Pagar Agora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================================
+             PÁGINA 2: O CLUBE & HISTÓRIA
+        ================================================================ -->
+        <section id="page-clube" class="page-view py-12 sm:py-16 alviverde-stripes-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Cabeçalho da Página -->
+                <div class="mb-10 border-b border-emerald-200 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-widest text-anca-green bg-anca-green/10 px-3 py-1 rounded-full mb-2">Institucional</span>
+                        <h1 class="font-display font-bold text-3xl sm:text-5xl text-anca-dark uppercase">O Clube & História</h1>
+                    </div>
+                    <p class="text-slate-600 text-sm max-w-md">Mais de oito décadas a honrar a vila de Ançã, a Pedra de Ançã e as cores verde e branca na Associação de Futebol de Coimbra.</p>
+                </div>
+
+                <!-- História + Imagem -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+                    <div class="lg:col-span-6 space-y-4 text-slate-700 leading-relaxed">
+                        <h2 class="font-display font-bold text-2xl sm:text-3xl text-anca-dark uppercase">Fundado em 1941 no Coração da Bairrada</h2>
+                        <p>
+                            O <strong>Ançã Futebol Clube</strong> foi fundado em <strong>1941</strong> por um grupo de jovens e entusiastas da histórica vila de Ançã, no concelho de Cantanhede. Desde a primeira hora, o clube adotou o <strong>verde e o branco</strong> como símbolos de esperança, nobreza e identidade comunitária.
+                        </p>
+                        <p>
+                            O nosso emblema — com a coroa heráldica superior, o listel "A F C" e os seis besantes verdes sobre o escudo branco — presta tributo à heráldica secular da vila famosa pela alvura da <strong>Pedra de Ançã</strong>, pelos seus monumentos e pelas águas cristalinas da Fonte de Ançã.
+                        </p>
+                        <p>
+                            Ao longo da sua história, o clube afirmou-se como um pilar educativo e social indispensável, formando centenas de jovens atletas e conquistando títulos distritais memoráveis.
+                        </p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                            <div class="bg-white p-4 rounded-xl border border-emerald-100 text-center shadow-sm">
+                                <span class="block font-display font-bold text-2xl text-anca-green">1941</span>
+                                <span class="text-[11px] uppercase text-slate-500 font-semibold">Ano Fundação</span>
+                            </div>
+                            <div class="bg-anca-green p-4 rounded-xl text-center text-white shadow-sm">
+                                <span class="block font-display font-bold text-2xl">+180</span>
+                                <span class="text-[11px] uppercase text-emerald-100 font-semibold">Atletas</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-emerald-100 text-center shadow-sm">
+                                <span class="block font-display font-bold text-2xl text-anca-green">+650</span>
+                                <span class="text-[11px] uppercase text-slate-500 font-semibold">Sócios</span>
+                            </div>
+                            <div class="bg-anca-dark p-4 rounded-xl text-center text-white shadow-sm">
+                                <span class="block font-display font-bold text-2xl text-anca-vibrant">14</span>
+                                <span class="text-[11px] uppercase text-emerald-100 font-semibold">Troféus</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6">
+                        <div class="bg-white p-4 rounded-2xl shadow-xl border border-emerald-100">
+                            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80"
+                                 alt="Parque Desportivo de Ançã"
+                                 onerror="this.src='https://placehold.co/800x500/007A43/FFFFFF?text=Parque+Desportivo+de+Anca'"
+                                 class="w-full h-72 sm:h-80 object-cover rounded-xl mb-4">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-2">
+                                <div>
+                                    <h3 class="font-display font-bold text-lg text-anca-dark uppercase">Parque Desportivo de Ançã</h3>
+                                    <p class="text-xs text-slate-500">Campo Dr. Américo Couto • Relvado Sintético de Última Geração & Iluminação LED</p>
+                                </div>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-anca-green text-white font-display font-bold uppercase text-xs tracking-wider text-center">
+                                    Abrir no Google Maps →
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </section>
 
-        <!-- VISTA: O CLUBE -->
-        <section id="view-clube" class="view-section">
-            <div class="container section-padding">
-                <div class="section-header">
-                    <h2>História & Identidade</h2>
-                    <p>Quase um século de dedicação ao desporto e à comunidade de Ançã</p>
-                </div>
-                <div class="about-grid">
-                    <div class="about-text">
-                        <h3>Fundado em 1932 na histórica vila de Ançã</h3>
-                        <p>O Ançã Futebol Clube é muito mais do que uma instituição desportiva; é o reflexo da alma e da união da freguesia de Ançã e do concelho de Cantanhede. Ao longo de mais de 90 anos de história, o clube tem sido um bastião na formação de jovens atletas e no desporto distrital de Coimbra.</p>
-                        <p>Com as inconfundíveis cores <strong>verde e branca</strong> e o emblema heráldico coroado com os tradicionais besantes, o Ançã FC continua a crescer com ambição, rigor e forte ligação à sua massa associativa.</p>
-                        <div class="club-stats">
-                            <div class="stat-box"><h4>1932</h4><small>Fundação</small></div>
-                            <div class="stat-box"><h4>90+</h4><small>Anos de História</small></div>
-                            <div class="stat-box"><h4>300+</h4><small>Atletas Formação</small></div>
-                        </div>
-                    </div>
-                    <div class="about-image-card">
-                        <div class="stadium-card-visual">
-                            <i class="fa-solid fa-landmark"></i>
-                            <h4>Parque Desportivo de Ançã</h4>
-                            <p>Casa oficial das nossas equipas de seniores e camadas jovens.</p>
-                            <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="btn btn-sm btn-light"><i class="fa-solid fa-map-location-dot"></i> Ver no Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- VISTA: FUTEBOL & FORMAÇÃO -->
-        <section id="view-futebol" class="view-section">
-            <div class="container section-padding">
-                <div class="section-header">
-                    <h2>Futebol & Formação</h2>
-                    <p>Da Equipa Sénior aos escalões de base</p>
-                </div>
-                <div class="grid-3">
-                    <div class="card-item">
-                        <div class="card-icon"><i class="fa-solid fa-user-shield"></i></div>
-                        <h3>Equipa Sénior</h3>
-                        <p>A disputar os campeonatos distritais da AF Coimbra com garra, união e espírito alviverde rumo aos lugares de topo.</p>
-                        <button class="btn btn-sm btn-outline mt-3" onclick="switchView('noticias')">Ver Plantel & Jogos</button>
-                    </div>
-                    <div class="card-item">
-                        <div class="card-icon"><i class="fa-solid fa-children"></i></div>
-                        <h3>Escola de Formação</h3>
-                        <p>Dos Petizes aos Juniores, educamos através do desporto, incutindo valores de fair-play, amizade e dedicação.</p>
-                        <button class="btn btn-sm btn-outline mt-3" onclick="switchView('socios')">Inscrever Atleta</button>
-                    </div>
-                    <div class="card-item">
-                        <div class="card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                        <h3>Calendário Geral</h3>
-                        <p>Consulta todos os horários de treinos e jornadas do próximo fim de semana no Campo Dr. Américo Couto.</p>
-                        <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="btn btn-sm btn-outline mt-3"><i class="fa-solid fa-map"></i> Como Chegar ao Campo</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- VISTA: SÓCIOS & BILHETEIRA -->
-        <section id="view-socios" class="view-section">
-            <div class="container section-padding">
-                <div class="section-header">
-                    <h2>Campanha de Sócios & Bilheteira</h2>
-                    <p>Sê parte da família alviverde e apoia o Ançã F.C.</p>
-                </div>
-                <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="price-header">
-                            <h3>Sócio Jovem / Sub-18</h3>
-                            <div class="price">5€ <span>/ mês</span></div>
-                        </div>
-                        <ul class="price-features">
-                            <li><i class="fa-solid fa-check"></i> Entrada livre nos jogos em casa</li>
-                            <li><i class="fa-solid fa-check"></i> Desconto na Loja Oficial</li>
-                            <li><i class="fa-solid fa-check"></i> Direito a voto em assembleia (se aplicável)</li>
+                <!-- Palmarés & Órgãos Sociais -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Palmarés -->
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-emerald-100">
+                        <span class="text-xs font-bold uppercase tracking-widest text-anca-green">Honra & Glória</span>
+                        <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-1 mb-5">Palmarés Principal</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center justify-between p-3 rounded-xl bg-anca-offwhite border border-emerald-100">
+                                <span class="font-semibold text-anca-dark">Campeonato Distrital 1.ª Divisão AF Coimbra</span>
+                                <span class="px-2.5 py-0.5 bg-anca-green text-white font-display font-bold text-xs rounded">3 Títulos</span>
+                            </li>
+                            <li class="flex items-center justify-between p-3 rounded-xl bg-anca-offwhite border border-emerald-100">
+                                <span class="font-semibold text-anca-dark">Taça Associação de Futebol de Coimbra</span>
+                                <span class="px-2.5 py-0.5 bg-anca-green text-white font-display font-bold text-xs rounded">2 Títulos</span>
+                            </li>
+                            <li class="flex items-center justify-between p-3 rounded-xl bg-anca-offwhite border border-emerald-100">
+                                <span class="font-semibold text-anca-dark">Supertaça Distrital AF Coimbra</span>
+                                <span class="px-2.5 py-0.5 bg-anca-dark text-anca-vibrant font-display font-bold text-xs rounded">2 Títulos</span>
+                            </li>
+                            <li class="flex items-center justify-between p-3 rounded-xl bg-anca-offwhite border border-emerald-100">
+                                <span class="font-semibold text-anca-dark">Campeonatos Distritais de Formação</span>
+                                <span class="px-2.5 py-0.5 bg-anca-dark text-anca-vibrant font-display font-bold text-xs rounded">7 Títulos</span>
+                            </li>
                         </ul>
-                        <button class="btn btn-primary btn-block" onclick="openCheckout('Sócio Jovem (Mensalidade)', 5.00)">Aderir Agora</button>
                     </div>
-                    <div class="price-card popular">
-                        <div class="badge-pop">Mais Popular</div>
-                        <div class="price-header">
-                            <h3>Sócio Efetivo Anual</h3>
-                            <div class="price">60€ <span>/ ano</span></div>
+
+                    <!-- Órgãos Sociais -->
+                    <div class="bg-anca-dark text-white rounded-2xl p-6 sm:p-8 shadow-md border border-anca-green/40">
+                        <span class="text-xs font-bold uppercase tracking-widest text-anca-vibrant">Gestão Institucional</span>
+                        <h3 class="font-display font-bold text-2xl uppercase mt-1 mb-5">Órgãos Sociais (Biéno 2025–2027)</h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                                <span class="text-xs uppercase tracking-wider text-anca-vibrant font-bold block">Direção Executiva</span>
+                                <p class="font-semibold text-white mt-0.5">Presidente: Dr. António Mendes</p>
+                                <p class="text-xs text-emerald-100/75">Vice-Presidentes: Eng. Carlos Ferreira & Rui Costa</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                                <span class="text-xs uppercase tracking-wider text-anca-vibrant font-bold block">Mesa da Assembleia Geral</span>
+                                <p class="font-semibold text-white mt-0.5">Presidente: Dr. Manuel Almeida</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                                <span class="text-xs uppercase tracking-wider text-anca-vibrant font-bold block">Conselho Fiscal</span>
+                                <p class="font-semibold text-white mt-0.5">Presidente: Dra. Sofia Marques</p>
+                            </div>
                         </div>
-                        <ul class="price-features">
-                            <li><i class="fa-solid fa-check"></i> Cartão de Sócio Oficial Alviverde</li>
-                            <li><i class="fa-solid fa-check"></i> Acesso total a todos os jogos caseiros</li>
-                            <li><i class="fa-solid fa-check"></i> 15% de desconto em merchandising</li>
-                            <li><i class="fa-solid fa-check"></i> Participação ativa no clube</li>
-                        </ul>
-                        <button class="btn btn-primary btn-block" onclick="openCheckout('Sócio Efetivo Anual', 60.00)">Tornar-me Efetivo</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="price-header">
-                            <h3>Bilhete Jogo Singular</h3>
-                            <div class="price">6€ <span>/ jogo</span></div>
-                        </div>
-                        <ul class="price-features">
-                            <li><i class="fa-solid fa-check"></i> Acesso à bancada coberta/descoberta</li>
-                            <li><i class="fa-solid fa-check"></i> Jogo oficial no Parque Desportivo de Ançã</li>
-                            <li><i class="fa-solid fa-check"></i> Emissão imediata de bilhete digital</li>
-                        </ul>
-                        <button class="btn btn-primary btn-block" onclick="openCheckout('Bilhete Jogo Único', 6.00)">Comprar Bilhete</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA: LOJA OFICIAL -->
-        <section id="view-loja" class="view-section">
-            <div class="container section-padding">
-                <div class="section-header">
-                    <h2>Loja Oficial Alviverde</h2>
-                    <p>Viste as cores do Ançã FC com orgulho</p>
+        <!-- ===============================================================
+             PÁGINA 3: FUTEBOL & FORMAÇÃO (PLANTEL, TABELA E CAPTAÇÕES)
+        ================================================================ -->
+        <section id="futebol" class="page-view py-12 sm:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 border-b border-emerald-100 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-widest text-white bg-anca-green px-3 py-1 rounded-full mb-2">Competição & Academia</span>
+                        <h1 class="font-display font-bold text-3xl sm:text-5xl text-anca-dark uppercase">Futebol & Formação</h1>
+                    </div>
+                    <button onclick="openCaptacoesModal('Geral / Todos os Escalões')" class="inline-flex items-center gap-2 bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase tracking-wider text-sm px-5 py-3 rounded-xl shadow cursor-pointer">
+                        <span>Inscrição nas Captações</span>
+                        <span>+</span>
+                    </button>
                 </div>
-                <div class="store-grid">
-                    <div class="store-item">
-                        <div class="store-img-placeholder"><i class="fa-solid fa-shirt"></i></div>
-                        <h4>Camisola Oficial Principal 25/26</h4>
-                        <span class="price-tag">45.00 €</span>
-                        <p>Equipamento listrado verde e branco oficial.</p>
-                        <button class="btn btn-sm btn-primary mt-2" onclick="openCheckout('Camisola Oficial Principal 25/26', 45.00)"><i class="fa-solid fa-cart-shopping"></i> Comprar</button>
+
+                <!-- Sub-abas internas da página Futebol -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <button onclick="switchFutebolTab('plantel')" id="ftab-btn-plantel" class="ftab-btn px-4 py-2 rounded-xl bg-anca-green text-white font-display font-bold uppercase text-xs tracking-wider cursor-pointer">
+                        Plantel Sénior 26/27
+                    </button>
+                    <button onclick="switchFutebolTab('classificacao')" id="ftab-btn-classificacao" class="ftab-btn px-4 py-2 rounded-xl bg-anca-offwhite text-anca-dark hover:bg-anca-light font-display font-bold uppercase text-xs tracking-wider border border-emerald-200 cursor-pointer">
+                        Classificação & Calendário
+                    </button>
+                    <button onclick="switchFutebolTab('escaloes')" id="ftab-btn-escaloes" class="ftab-btn px-4 py-2 rounded-xl bg-anca-offwhite text-anca-dark hover:bg-anca-light font-display font-bold uppercase text-xs tracking-wider border border-emerald-200 cursor-pointer">
+                        Escalões de Formação (Sub-7 a Sub-19)
+                    </button>
+                </div>
+
+                <!-- Conteúdo Tab 1: Plantel Sénior -->
+                <div id="ftab-plantel" class="ftab-content">
+                    <!-- Filtro por Posição -->
+                    <div class="flex flex-wrap items-center gap-2 mb-6">
+                        <span class="text-xs font-bold uppercase text-slate-500 mr-1">Filtrar posição:</span>
+                        <button onclick="filterSquad('TODOS')" class="squad-filter px-3 py-1 rounded-lg bg-anca-dark text-white text-xs font-semibold cursor-pointer">Todos</button>
+                        <button onclick="filterSquad('Guarda-Redes')" class="squad-filter px-3 py-1 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-semibold cursor-pointer">Guarda-Redes</button>
+                        <button onclick="filterSquad('Defesa')" class="squad-filter px-3 py-1 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-semibold cursor-pointer">Defesas</button>
+                        <button onclick="filterSquad('Médio')" class="squad-filter px-3 py-1 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-semibold cursor-pointer">Médios</button>
+                        <button onclick="filterSquad('Avançado')" class="squad-filter px-3 py-1 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-semibold cursor-pointer">Avançados</button>
                     </div>
-                    <div class="store-item">
-                        <div class="store-img-placeholder"><i class="fa-solid fa-shirt"></i></div>
-                        <h4>Equipamento Alternativo</h4>
-                        <span class="price-tag">45.00 €</span>
-                        <p>Design moderno para os jogos fora de portas.</p>
-                        <button class="btn btn-sm btn-primary mt-2" onclick="openCheckout('Equipamento Alternativo', 45.00)"><i class="fa-solid fa-cart-shopping"></i> Comprar</button>
+
+                    <div id="squad-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                        <!-- Preenchido via JS -->
                     </div>
-                    <div class="store-item">
-                        <div class="store-img-placeholder"><i class="fa-solid fa-scarf"></i></div>
-                        <h4>Cachecol Alviverde Oficial</h4>
-                        <span class="price-tag">12.50 €</span>
-                        <p>Ideal para apoiar a equipa na bancada.</p>
-                        <button class="btn btn-sm btn-primary mt-2" onclick="openCheckout('Cachecol Alviverde Oficial', 12.50)"><i class="fa-solid fa-cart-shopping"></i> Comprar</button>
+                </div>
+
+                <!-- Conteúdo Tab 2: Classificação & Calendário -->
+                <div id="ftab-classificacao" class="ftab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <div class="lg:col-span-7 bg-white rounded-2xl border border-emerald-100 shadow-sm overflow-hidden">
+                            <div class="bg-anca-dark text-white px-5 py-3.5 flex items-center justify-between">
+                                <h3 class="font-display font-bold text-lg uppercase">Divisão de Honra • AF Coimbra</h3>
+                                <span class="text-xs text-anca-vibrant font-semibold">Jornada 10</span>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm">
+                                    <thead class="bg-anca-offwhite text-xs uppercase text-slate-500 border-b border-emerald-100">
+                                        <tr>
+                                            <th class="py-3 px-4">#</th>
+                                            <th class="py-3 px-4">Clube</th>
+                                            <th class="py-3 px-4 text-center">J</th>
+                                            <th class="py-3 px-4 text-center">V</th>
+                                            <th class="py-3 px-4 text-center">E</th>
+                                            <th class="py-3 px-4 text-center">D</th>
+                                            <th class="py-3 px-4 text-center font-bold">PTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100">
+                                        <tr><td class="py-3 px-4 font-bold">1</td><td class="py-3 px-4 font-medium">União FC</td><td class="py-3 px-4 text-center">10</td><td class="py-3 px-4 text-center">8</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4 text-center font-bold">25</td></tr>
+                                        <tr class="bg-anca-light/70 font-bold text-anca-dark"><td class="py-3 px-4 text-anca-green">2</td><td class="py-3 px-4 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-anca-green"></span>Ançã FC</td><td class="py-3 px-4 text-center">10</td><td class="py-3 px-4 text-center">7</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4 text-center text-anca-green text-base">23</td></tr>
+                                        <tr><td class="py-3 px-4 font-bold">3</td><td class="py-3 px-4 font-medium">AD Nogueirense</td><td class="py-3 px-4 text-center">10</td><td class="py-3 px-4 text-center">6</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4 text-center font-bold">20</td></tr>
+                                        <tr><td class="py-3 px-4 font-bold">4</td><td class="py-3 px-4 font-medium">Académica SF</td><td class="py-3 px-4 text-center">10</td><td class="py-3 px-4 text-center">5</td><td class="py-3 px-4 text-center">3</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4 text-center font-bold">18</td></tr>
+                                        <tr><td class="py-3 px-4 font-bold">5</td><td class="py-3 px-4 font-medium">Febres SC</td><td class="py-3 px-4 text-center">10</td><td class="py-3 px-4 text-center">4</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4 text-center">4</td><td class="py-3 px-4 text-center font-bold">14</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 bg-anca-offwhite rounded-2xl p-6 border border-emerald-100 space-y-4">
+                            <h3 class="font-display font-bold text-xl text-anca-dark uppercase">Próximas Jornadas</h3>
+                            <div class="p-4 bg-white rounded-xl border border-emerald-200 shadow-sm">
+                                <span class="text-xs font-bold text-anca-green uppercase">Jornada 11 • Domingo, 15:00h</span>
+                                <p class="font-display font-bold text-lg text-anca-dark mt-1">Ançã FC vs AD Nogueirense</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Parque Desportivo de Ançã (Casa)</p>
+                                <button onclick="addToCart('bilhete-j11', 'Bilhete Jogo: Ançã FC vs AD Nogueirense', 5.00, 'Bilheteira')" class="mt-3 px-3.5 py-1.5 rounded-lg bg-anca-green text-white text-xs font-display font-bold uppercase tracking-wider cursor-pointer">
+                                    Reservar Bilhete (5€)
+                                </button>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Jornada 12 • Domingo seguinte, 15:00h</span>
+                                <p class="font-display font-bold text-lg text-slate-800 mt-1">Vigor Mocidade vs Ançã FC</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Campo do Vigor (Fora)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo Tab 3: Escalões de Formação -->
+                <div id="ftab-escaloes" class="ftab-content hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-anca-offwhite rounded-2xl p-6 border border-emerald-100">
+                            <span class="px-2.5 py-1 bg-anca-green/10 text-anca-green font-display font-bold text-xs uppercase rounded">Sub-7 a Sub-9</span>
+                            <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-3 mb-2">Petizes & Traquinas</h3>
+                            <p class="text-sm text-slate-600 mb-4">Iniciação lúdica, coordenação motora e espírito de equipa. Treinos: Terças e Quintas às 18:15h.</p>
+                            <button onclick="openCaptacoesModal('Petizes & Traquinas (Sub-7 a Sub-9)')" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Inscrever Atleta →</button>
+                        </div>
+                        <div class="bg-anca-offwhite rounded-2xl p-6 border border-emerald-100">
+                            <span class="px-2.5 py-1 bg-anca-green/10 text-anca-green font-display font-bold text-xs uppercase rounded">Sub-10 & Sub-11</span>
+                            <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-3 mb-2">Benjamins</h3>
+                            <p class="text-sm text-slate-600 mb-4">Técnica individual e fundamentos de Futebol de 7. Treinos: Segundas, Quartas e Sextas às 18:30h.</p>
+                            <button onclick="openCaptacoesModal('Benjamins (Sub-10 & Sub-11)')" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Inscrever Atleta →</button>
+                        </div>
+                        <div class="bg-anca-offwhite rounded-2xl p-6 border border-emerald-100">
+                            <span class="px-2.5 py-1 bg-anca-green/10 text-anca-green font-display font-bold text-xs uppercase rounded">Sub-12 & Sub-13</span>
+                            <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-3 mb-2">Infantis</h3>
+                            <p class="text-sm text-slate-600 mb-4">Transição para Futebol de 9 e 11 com foco tático. Treinos: Segundas, Quartas e Sextas às 19:30h.</p>
+                            <button onclick="openCaptacoesModal('Infantis (Sub-12 & Sub-13)')" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Inscrever Atleta →</button>
+                        </div>
+                        <div class="bg-anca-offwhite rounded-2xl p-6 border border-emerald-100">
+                            <span class="px-2.5 py-1 bg-anca-green/10 text-anca-green font-display font-bold text-xs uppercase rounded">Sub-14 & Sub-15</span>
+                            <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-3 mb-2">Iniciados</h3>
+                            <p class="text-sm text-slate-600 mb-4">Competição distrital de Futebol de 11. Treinos: Terças, Quintas e Sextas às 19:30h.</p>
+                            <button onclick="openCaptacoesModal('Iniciados (Sub-14 & Sub-15)')" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Inscrever Atleta →</button>
+                        </div>
+                        <div class="bg-anca-offwhite rounded-2xl p-6 border border-emerald-100">
+                            <span class="px-2.5 py-1 bg-anca-green/10 text-anca-green font-display font-bold text-xs uppercase rounded">Sub-16 & Sub-17</span>
+                            <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-3 mb-2">Juvenis</h3>
+                            <p class="text-sm text-slate-600 mb-4">Alta competitividade e preparação física específica. Treinos: Terças, Quintas e Sextas às 20:30h.</p>
+                            <button onclick="openCaptacoesModal('Juvenis (Sub-16 & Sub-17)')" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Inscrever Atleta →</button>
+                        </div>
+                        <div class="bg-anca-offwhite rounded-2xl p-6 border border-emerald-100">
+                            <span class="px-2.5 py-1 bg-anca-green/10 text-anca-green font-display font-bold text-xs uppercase rounded">Sub-18 & Sub-19</span>
+                            <h3 class="font-display font-bold text-2xl text-anca-dark uppercase mt-3 mb-2">Juniores</h3>
+                            <p class="text-sm text-slate-600 mb-4">Integração direta com o plantel Sénior do Ançã FC. Treinos: Segundas, Quartas e Sextas às 20:30h.</p>
+                            <button onclick="openCaptacoesModal('Juniores (Sub-18 & Sub-19)')" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Inscrever Atleta →</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA: NOTÍCIAS -->
-        <section id="view-noticias" class="view-section">
-            <div class="container section-padding">
-                <div class="section-header">
-                    <h2>Últimas Notícias</h2>
-                    <p>Acompanha tudo o que acontece no universo do Ançã FC</p>
+        <!-- ===============================================================
+             PÁGINA 4: SÓCIOS & BILHETEIRA (COM ADIÇÃO DIRETA AO PAGAMENTO)
+        ================================================================ -->
+        <section id="page-socios" class="page-view py-12 sm:py-16 pitch-pattern text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 border-b border-white/15 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-widest text-anca-vibrant bg-white/10 px-3 py-1 rounded-full mb-2">Comunidade Alviverde</span>
+                        <h1 class="font-display font-bold text-3xl sm:text-5xl uppercase">Sócios & Bilheteira Online</h1>
+                    </div>
+                    <p class="text-emerald-100/80 text-sm max-w-md">Adere como sócio, paga a tua quota anual ou compra bilhetes de jogo com MB WAY, Multibanco, PayPal ou Cartão.</p>
                 </div>
-                <div class="grid-3">
-                    <div class="news-card" onclick="openNewsModal('Assembleia Geral Ordinária Convocatória', 'O Ançã Futebol Clube convoca todos os seus associados para a Assembleia Geral Ordinária a realizar na sede social no próximo dia 30 de março pelas 20:30 horas, com a seguinte ordem de trabalhos: 1. Apreciação e votação do relatório e contas; 2. Outros assuntos de interesse.')">
-                        <div class="news-thumb"><i class="fa-solid fa-bullhorn"></i></div>
-                        <div class="news-body">
-                            <span class="news-date">18 Março 2026</span>
-                            <h4>Assembleia Geral Ordinária Convocatória</h4>
-                            <p>Convocatória oficial dirigida a todos os sócios efetivos para discussão das contas e futuro do clube.</p>
-                            <span class="read-more">Ler artigo &rarr;</span>
+
+                <!-- Simulador de Cartão de Sócio Oficial -->
+                <div class="bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-6 sm:p-8 mb-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-6 space-y-4">
+                            <span class="text-xs font-bold uppercase tracking-widest text-anca-vibrant">Cartão Oficial 2026/27</span>
+                            <h2 class="font-display font-bold text-2xl uppercase">Personaliza o Teu Cartão de Sócio</h2>
+                            <div>
+                                <label for="card-name-input" class="block text-xs font-semibold uppercase text-emerald-200 mb-1.5">Nome do Titular</label>
+                                <input id="card-name-input" type="text" maxlength="28" placeholder="Ex: António Silva" oninput="updateMemberCardPreview(this.value)" class="w-full px-4 py-3 rounded-xl bg-anca-dark/90 border border-white/20 text-white placeholder-emerald-200/40 focus:border-anca-vibrant outline-none text-sm">
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" onclick="setCardCategory('SÓCIO EFETIVO')" class="px-3 py-1.5 rounded-lg bg-anca-green text-white text-xs font-bold uppercase border border-white/25 cursor-pointer">Efetivo</button>
+                                <button type="button" onclick="setCardCategory('SÓCIO JOVEM')" class="px-3 py-1.5 rounded-lg bg-white/10 text-white text-xs font-bold uppercase border border-white/15 cursor-pointer">Jovem</button>
+                                <button type="button" onclick="setCardCategory('CORRESPONDENTE')" class="px-3 py-1.5 rounded-lg bg-white/10 text-white text-xs font-bold uppercase border border-white/15 cursor-pointer">Correspondente</button>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-6 flex justify-center">
+                            <div class="member-card w-full max-w-md aspect-[1.586/1] rounded-2xl p-6 shadow-2xl border-2 border-white/30 flex flex-col justify-between select-none">
+                                <div class="flex items-center justify-between relative z-10">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-11 h-11 rounded-full bg-white p-1 shadow flex items-center justify-center">
+                                            <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
+                                        </div>
+                                        <div>
+                                            <span class="block font-display font-bold text-lg uppercase leading-none text-white">Ançã FC</span>
+                                            <span class="block text-[10px] tracking-widest uppercase text-emerald-200 mt-1">Fundado em 1941</span>
+                                        </div>
+                                    </div>
+                                    <span id="card-preview-badge" class="px-2.5 py-1 rounded bg-white text-anca-green font-display font-bold text-[11px] uppercase shadow">SÓCIO EFETIVO</span>
+                                </div>
+                                <div class="my-auto relative z-10 flex items-center justify-between">
+                                    <div class="w-10 h-7 rounded-md bg-gradient-to-br from-emerald-100 to-white/80 border border-white/50"></div>
+                                    <span class="font-display text-xs tracking-widest text-white/70 uppercase">Época 2026 / 2027</span>
+                                </div>
+                                <div class="flex items-end justify-between relative z-10 border-t border-white/20 pt-3">
+                                    <div>
+                                        <span class="block text-[9px] uppercase tracking-widest text-emerald-200">Titular</span>
+                                        <p id="card-preview-name" class="font-heading font-bold text-base sm:text-lg uppercase text-white truncate max-w-[210px]">O TEU NOME AQUI</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="block text-[9px] uppercase tracking-widest text-emerald-200">Sócio N.º</span>
+                                        <span class="font-display font-bold text-base text-anca-vibrant">#0651</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="news-card" onclick="openNewsModal('Inauguração do Novo Relvado Sintético nos Escalões de Formação', 'É com enorme orgulho que o Ançã FC anuncia a conclusão das melhorias no complexo de treinos, oferecendo melhores condições para os mais de 300 atletas da formação.')">
-                        <div class="news-thumb"><i class="fa-solid fa-futbol"></i></div>
-                        <div class="news-body">
-                            <span class="news-date">10 Março 2026</span>
-                            <h4>Novas Condições na Formação Alviverde</h4>
-                            <p>Investimento contínuo na qualidade dos treinos e bem-estar dos nossos jovens atletas da vila de Ançã.</p>
-                            <span class="read-more">Ler artigo &rarr;</span>
+                </div>
+
+                <!-- Planos de Quotas com Pagamento Direto -->
+                <h2 class="font-display font-bold text-2xl uppercase mb-6 text-anca-vibrant">1. Quotas & Adesão de Sócio (Pagamento Online)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+                    <div class="bg-anca-dark/90 rounded-2xl p-6 border border-white/15 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-anca-vibrant">Dos 6 aos 17 Anos</span>
+                            <h3 class="font-display font-bold text-2xl uppercase mt-1">Sócio Jovem</h3>
+                            <p class="font-display font-bold text-4xl my-3">15,00€ <span class="text-xs font-sans font-normal text-emerald-200">/ ano</span></p>
+                            <ul class="space-y-2 text-sm text-emerald-100/85 mb-6">
+                                <li>✓ Cartão de Sócio Alviverde</li>
+                                <li>✓ Entrada gratuita nos jogos em casa</li>
+                                <li>✓ 10% desconto na Loja Oficial</li>
+                            </ul>
                         </div>
+                        <button onclick="addToCart('quota-jovem', 'Quota Anual: Sócio Jovem (2026/27)', 15.00, 'Quotas de Sócio', true)" class="w-full py-3 rounded-xl bg-white/15 hover:bg-white hover:text-anca-green font-display font-bold uppercase text-sm tracking-wider transition-all cursor-pointer">
+                            Pagar Quota Jovem (15€)
+                        </button>
                     </div>
-                    <div class="news-card" onclick="openNewsModal('Antevisão do Dérbi: Ançã FC vs UD Tocha', 'Técnico e plantel preparam com máxima concentração o embate decisivo deste fim de semana no Campo Dr. Américo Couto. Contamos com o apoio incansável dos adeptos!')">
-                        <div class="news-thumb"><i class="fa-solid fa-trophy"></i></div>
-                        <div class="news-body">
-                            <span class="news-date">05 Março 2026</span>
-                            <h4>Antevisão do Dérbi Distrital</h4>
-                            <p>Preparação intensa para o jogo grande da jornada com forte mobilização da massa associativa.</p>
-                            <span class="read-more">Ler artigo &rarr;</span>
+
+                    <div class="bg-white text-anca-dark rounded-2xl p-7 border-4 border-anca-vibrant shadow-2xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold uppercase text-anca-green">A partir dos 18 Anos</span>
+                                <span class="px-2 py-0.5 bg-anca-green text-white text-[10px] font-bold uppercase rounded">Recomendado</span>
+                            </div>
+                            <h3 class="font-display font-bold text-3xl uppercase mt-1">Sócio Efetivo</h3>
+                            <p class="font-display font-bold text-4xl text-anca-green my-3">30,00€ <span class="text-xs font-sans font-normal text-slate-500">/ ano</span></p>
+                            <ul class="space-y-2 text-sm text-slate-700 mb-6">
+                                <li>✓ Acesso livre a todos os jogos do Campeonato em Ançã</li>
+                                <li>✓ Direito de voto nas Assembleias Gerais</li>
+                                <li>✓ Descontos nos parceiros comerciais de Ançã</li>
+                            </ul>
                         </div>
+                        <button onclick="addToCart('quota-efetivo', 'Quota Anual: Sócio Efetivo (2026/27)', 30.00, 'Quotas de Sócio', true)" class="w-full py-3.5 rounded-xl bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase text-sm tracking-wider shadow-lg transition-all cursor-pointer">
+                            Pagar Quota Efetivo (30€)
+                        </button>
                     </div>
+
+                    <div class="bg-anca-dark/90 rounded-2xl p-6 border border-white/15 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-anca-vibrant">Diáspora & Simpatizantes</span>
+                            <h3 class="font-display font-bold text-2xl uppercase mt-1">Sócio Correspondente</h3>
+                            <p class="font-display font-bold text-4xl my-3">20,00€ <span class="text-xs font-sans font-normal text-emerald-200">/ ano</span></p>
+                            <ul class="space-y-2 text-sm text-emerald-100/85 mb-6">
+                                <li>✓ Envio do Cartão para qualquer morada</li>
+                                <li>✓ Entrada livre sempre que visitar Ançã</li>
+                                <li>✓ Newsletter exclusiva do clube</li>
+                            </ul>
+                        </div>
+                        <button onclick="addToCart('quota-corresp', 'Quota Anual: Sócio Correspondente (2026/27)', 20.00, 'Quotas de Sócio', true)" class="w-full py-3 rounded-xl bg-white/15 hover:bg-white hover:text-anca-green font-display font-bold uppercase text-sm tracking-wider transition-all cursor-pointer">
+                            Pagar Correspondente (20€)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bilheteira Próximo Jogo -->
+                <h2 class="font-display font-bold text-2xl uppercase mb-6 text-anca-vibrant">2. Bilheteira • Próximo Jogo em Casa</h2>
+                <div class="bg-white text-anca-dark rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl">
+                    <div>
+                        <span class="px-2.5 py-0.5 bg-anca-light text-anca-green font-bold text-xs uppercase rounded">Domingo, 15:00H • Campo Dr. Américo Couto</span>
+                        <h3 class="font-display font-bold text-2xl uppercase mt-2">Ançã FC vs AD Nogueirense</h3>
+                        <p class="text-sm text-slate-600 mt-1">Bilhete de Público Geral (Bancada Central). Sócios com quota 2026/27 regularizada têm entrada gratuita.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                        <button onclick="addToCart('bilhete-geral', 'Bilhete Público Geral: Ançã FC vs AD Nogueirense', 5.00, 'Bilheteira', true)" class="px-5 py-3 rounded-xl bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase text-sm tracking-wider shadow cursor-pointer">
+                            Comprar Bilhete Geral (5,00€)
+                        </button>
+                        <button onclick="addToCart('bilhete-acompanhante', 'Bilhete Acompanhante de Sócio: Ançã FC vs AD Nogueirense', 2.50, 'Bilheteira', true)" class="px-5 py-3 rounded-xl bg-anca-offwhite hover:bg-anca-light text-anca-dark border border-emerald-200 font-display font-bold uppercase text-sm tracking-wider cursor-pointer">
+                            Acompanhante Sócio (2,50€)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================================
+             PÁGINA 5: LOJA OFICIAL ALVIVERDE
+        ================================================================ -->
+        <section id="page-loja" class="page-view py-12 sm:py-16 alviverde-stripes-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 border-b border-emerald-200 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-widest text-anca-green bg-anca-green/10 px-3 py-1 rounded-full mb-2">Merchandising Oficial</span>
+                        <h1 class="font-display font-bold text-3xl sm:text-5xl text-anca-dark uppercase">Loja Oficial Ançã FC</h1>
+                    </div>
+                    <button onclick="openCheckoutModal()" class="inline-flex items-center gap-2 bg-anca-dark hover:bg-anca-green text-white font-display font-bold uppercase tracking-wider text-sm px-5 py-3 rounded-xl shadow transition-colors cursor-pointer">
+                        <span>Ver Carrinho & Pagar</span>
+                        <span id="store-cart-count" class="px-2 py-0.5 rounded-full bg-anca-vibrant text-anca-dark text-xs font-sans font-bold">0</span>
+                    </button>
+                </div>
+
+                <div id="store-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================================
+             PÁGINA 6: NOTÍCIAS & COMUNICADOS
+        ================================================================ -->
+        <section id="page-noticias" class="page-view py-12 sm:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 border-b border-emerald-100 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-widest text-anca-green bg-anca-green/10 px-3 py-1 rounded-full mb-2">Sala de Imprensa</span>
+                        <h1 class="font-display font-bold text-3xl sm:text-5xl text-anca-dark uppercase">Notícias & Comunicados</h1>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterNews('TODAS')" class="news-filter px-3.5 py-1.5 rounded-lg bg-anca-green text-white text-xs font-bold uppercase cursor-pointer">Todas</button>
+                        <button onclick="filterNews('Equipa Sénior')" class="news-filter px-3.5 py-1.5 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-bold uppercase cursor-pointer">Equipa Sénior</button>
+                        <button onclick="filterNews('Formação')" class="news-filter px-3.5 py-1.5 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-bold uppercase cursor-pointer">Formação</button>
+                        <button onclick="filterNews('Institucional')" class="news-filter px-3.5 py-1.5 rounded-lg bg-anca-offwhite text-slate-700 hover:bg-anca-light text-xs font-bold uppercase cursor-pointer">Institucional</button>
+                    </div>
+                </div>
+
+                <div id="news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Preenchido via JS -->
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- RODAPÉ -->
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <div class="footer-logo">
-                    <span class="club-title">Ançã F.C.</span>
+    <!-- =====================================================================
+         RODAPÉ INSTITUCIONAL + BOTÃO PARA VER CÓDIGO SEPARADO
+    ====================================================================== -->
+    <footer class="bg-anca-dark text-white pt-12 pb-8 border-t-4 border-anca-green mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 rounded-full bg-white p-1 flex items-center justify-center">
+                            <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
+                        </div>
+                        <div>
+                            <span class="block font-display font-bold text-lg uppercase">Ançã FC</span>
+                            <span class="block text-xs text-anca-vibrant">Orgulho Alviverde • 1941</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-100/75 leading-relaxed">
+                        Ançã Futebol Clube — Instituição desportiva de utilidade pública no coração da Bairrada, concelho de Cantanhede.
+                    </p>
                 </div>
-                <p>O clube do coração de toda a vila de Ançã e do concelho de Cantanhede. Fundado em 1932.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+
+                <div>
+                    <h4 class="font-display font-bold text-base uppercase tracking-wider text-anca-vibrant mb-3">Navegação Rápida</h4>
+                    <ul class="space-y-1.5 text-xs text-emerald-100/80">
+                        <li><button onclick="navigateTo('inicio')" class="hover:text-white cursor-pointer">Início</button></li>
+                        <li><button onclick="navigateTo('clube')" class="hover:text-white cursor-pointer">O Clube & História</button></li>
+                        <li><button onclick="navigateTo('futebol')" class="hover:text-white cursor-pointer">Futebol & Formação</button></li>
+                        <li><button onclick="navigateTo('socios')" class="hover:text-white cursor-pointer">Sócios & Bilheteira</button></li>
+                        <li><button onclick="navigateTo('loja')" class="hover:text-white cursor-pointer">Loja Oficial</button></li>
+                        <li><button onclick="navigateTo('noticias')" class="hover:text-white cursor-pointer">Notícias</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-display font-bold text-base uppercase tracking-wider text-anca-vibrant mb-3">Localização & Contactos</h4>
+                    <ul class="space-y-2 text-xs text-emerald-100/80">
+                        <li>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede" target="_blank" rel="noopener noreferrer" class="hover:text-anca-vibrant transition-colors block">
+                                <strong class="text-white">Parque Desportivo de Ançã</strong><br>
+                                Campo Dr. Américo Couto, 3060-027 Ançã, Cantanhede (Abrir Maps →)
+                            </a>
+                        </li>
+                        <li>Email: geral@ancafc.pt</li>
+                        <li>Secretaria: +351 239 961 000</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-display font-bold text-base uppercase tracking-wider text-anca-vibrant mb-3">Pagamentos Aceites</h4>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded bg-white text-anca-dark font-bold text-[11px]">MB WAY</span>
+                        <span class="px-2.5 py-1 rounded bg-white text-anca-dark font-bold text-[11px]">Multibanco</span>
+                        <span class="px-2.5 py-1 rounded bg-white text-[#003087] font-bold text-[11px]">PayPal</span>
+                        <span class="px-2.5 py-1 rounded bg-white text-slate-800 font-bold text-[11px]">Visa / Mastercard</span>
+                    </div>
+                    <button onclick="openSourceCodeModal()" class="w-full py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold text-emerald-100 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+                        <svg class="w-4 h-4 text-anca-vibrant" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        <span>Ver Código Separado (HTML/CSS/JS)</span>
+                    </button>
                 </div>
             </div>
-            <div class="footer-col">
-                <h4>Links Rápidos</h4>
-                <ul>
-                    <li><a href="#" onclick="switchView('clube')">O Clube & História</a></li>
-                    <li><a href="#" onclick="switchView('futebol')">Futebol & Formação</a></li>
-                    <li><a href="#" onclick="switchView('socios')">Quotas de Sócio</a></li>
-                    <li><a href="#" onclick="switchView('loja')">Loja Oficial</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contactos & Localização</h4>
-                <p><i class="fa-solid fa-location-dot"></i> <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="footer-map-link">Parque Desportivo de Ançã, 3060-012 Ançã</a></p>
-                <p><i class="fa-solid fa-phone"></i> +351 239 000 000</p>
-                <p><i class="fa-solid fa-envelope"></i> geral@ancafc.pt</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2026 Ançã Futebol Clube. Todos os direitos reservados. Feito com orgulho Alviverde.</p>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-emerald-200/60">
+                <p>© 2026 Ançã Futebol Clube. Todos os direitos reservados.</p>
+                <p>Orgulho Alviverde • Ançã, Cantanhede • AF Coimbra</p>
             </div>
         </div>
     </footer>
 
-    <!-- MODAL DE CHECKOUT / PAGAMENTO COM MÉTODOS MÚLTIPLOS -->
-    <div class="modal-overlay" id="checkoutModal">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closeCheckout()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header-box">
-                <i class="fa-solid fa-lock"></i>
-                <h3>Tesouraria Digital Ançã FC</h3>
-                <p id="checkoutItemTitle">Item Selecionado</p>
-            </div>
-            
-            <div class="checkout-body" id="checkoutBodyForm">
-                <div class="form-group">
-                    <label>Nome Completo</label>
-                    <input type="text" id="buyerName" placeholder="Insira o seu nome" required>
-                </div>
-                <div class="form-group">
-                    <label>Endereço de E-mail</label>
-                    <input type="email" id="buyerEmail" placeholder="exemplo@dominio.pt" required>
-                </div>
-
-                <label class="payment-method-label">Escolha o Método de Pagamento:</label>
-                <div class="payment-options">
-                    <label class="pay-option selected" onclick="selectPaymentMethod('mbway', this)">
-                        <input type="radio" name="paymethod" checked>
-                        <span><i class="fa-solid fa-mobile-screen"></i> MB WAY</span>
-                    </label>
-                    <label class="pay-option" onclick="selectPaymentMethod('multibanco', this)">
-                        <input type="radio" name="paymethod">
-                        <span><i class="fa-solid fa-building-columns"></i> Multibanco</span>
-                    </label>
-                    <label class="pay-option" onclick="selectPaymentMethod('paypal', this)">
-                        <input type="radio" name="paymethod">
-                        <span><i class="fa-brands fa-paypal"></i> PayPal</span>
-                    </label>
-                    <label class="pay-option" onclick="selectPaymentMethod('card', this)">
-                        <input type="radio" name="paymethod">
-                        <span><i class="fa-solid fa-credit-card"></i> Cartão Bancário</span>
-                    </label>
-                </div>
-
-                <!-- Campos dinâmicos MB WAY -->
-                <div id="paymentDetailsMBWay" class="payment-details-box">
-                    <label>Número de Telemóvel MB WAY (+351)</label>
-                    <input type="tel" id="mbwayPhone" placeholder="912345678" maxlength="9">
-                    <small>Iremos enviar uma notificação instantânea para a sua aplicação MB WAY.</small>
-                </div>
-
-                <!-- Campos dinâmicos Multibanco -->
-                <div id="paymentDetailsMultibanco" class="payment-details-box" style="display:none;">
-                    <div class="mb-ref-box">
-                        <p><strong>Entidade:</strong> 21800</p>
-                        <p><strong>Referência:</strong> 948 271 005</p>
-                        <p><strong>Montante:</strong> <span id="mbAmountVal">6.00 €</span></p>
+    <!-- =====================================================================
+         MODAL DE PAGAMENTOS & CHECKOUT (MB WAY, MULTIBANCO, PAYPAL, CARTÃO)
+    ====================================================================== -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-anca-dark/85 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl border border-emerald-200 max-h-[92vh] flex flex-col">
+            <!-- Cabeçalho Checkout -->
+            <div class="bg-anca-dark px-6 py-4 flex items-center justify-between border-b-4 border-anca-green flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-white p-0.5 flex items-center justify-center">
+                        <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
                     </div>
-                    <small>Pode pagar em qualquer Caixa Automática ou Homebanking.</small>
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-anca-vibrant block">Tesouraria Digital Ançã FC</span>
+                        <h3 class="font-display font-bold text-xl text-white uppercase">Checkout & Pagamento Seguro</h3>
+                    </div>
                 </div>
+                <button onclick="closeModal('checkout-modal')" class="text-white/70 hover:text-white p-1.5 rounded-lg hover:bg-white/10 cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
 
-                <!-- Campos dinâmicos Cartão -->
-                <div id="paymentDetailsCard" class="payment-details-box" style="display:none;">
-                    <label>Número do Cartão</label>
-                    <input type="text" placeholder="4532 •••• •••• 8901">
-                    <div class="row-inputs">
-                        <div>
-                            <label>Validade</label>
-                            <input type="text" placeholder="MM/AA">
+            <!-- Corpo Checkout -->
+            <div id="checkout-body" class="p-6 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Coluna Esquerda: Resumo do Pedido + Adição Rápida -->
+                <div class="lg:col-span-5 bg-anca-offwhite p-5 rounded-2xl border border-emerald-100 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-display font-bold text-lg text-anca-dark uppercase mb-3">Resumo do Carrinho</h4>
+                        
+                        <div id="checkout-items-list" class="space-y-2.5 max-h-56 overflow-y-auto pr-1 mb-4">
+                            <!-- Itens inseridos via JS -->
                         </div>
-                        <div>
-                            <label>CVV</label>
-                            <input type="password" placeholder="123" maxlength="4">
+
+                        <!-- Adicionar rapidamente se vazio ou quiser juntar -->
+                        <div class="pt-3 border-t border-emerald-200/70">
+                            <p class="text-[11px] font-bold uppercase text-slate-500 mb-2">Adicionar Pagamento Rápido:</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button type="button" onclick="addToCart('quota-efetivo', 'Quota Anual: Sócio Efetivo (2026/27)', 30.00, 'Quotas de Sócio')" class="px-2.5 py-1 rounded bg-white border border-emerald-200 text-xs font-semibold text-anca-dark hover:bg-anca-light cursor-pointer">+ Quota Sócio (30€)</button>
+                                <button type="button" onclick="addToCart('bilhete-geral', 'Bilhete Jogo: Ançã FC vs AD Nogueirense', 5.00, 'Bilheteira')" class="px-2.5 py-1 rounded bg-white border border-emerald-200 text-xs font-semibold text-anca-dark hover:bg-anca-light cursor-pointer">+ Bilhete Jogo (5€)</button>
+                                <button type="button" onclick="addToCart('cachecol-oficial', 'Cachecol Oficial Alviverde', 12.00, 'Loja Oficial')" class="px-2.5 py-1 rounded bg-white border border-emerald-200 text-xs font-semibold text-anca-dark hover:bg-anca-light cursor-pointer">+ Cachecol (12€)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t-2 border-anca-green/20">
+                        <div class="flex items-center justify-between text-sm text-slate-600 mb-1">
+                            <span>Subtotal</span>
+                            <span id="checkout-subtotal">0,00€</span>
+                        </div>
+                        <div class="flex items-center justify-between text-lg font-display font-bold text-anca-dark uppercase">
+                            <span>Total a Pagar</span>
+                            <span id="checkout-total" class="text-2xl text-anca-green">0,00€</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Campos dinâmicos PayPal -->
-                <div id="paymentDetailsPaypal" class="payment-details-box" style="display:none;">
-                    <p style="text-align: center; color: #555; padding: 10px 0;">Será redirecionado de forma segura para autorizar o pagamento na sua conta PayPal.</p>
-                </div>
+                <!-- Coluna Direita: Dados do Pagador & Seleção do Método de Pagamento -->
+                <div class="lg:col-span-7 space-y-5">
+                    <div>
+                        <h4 class="font-display font-bold text-lg text-anca-dark uppercase mb-3">1. Dados do Sócio / Cliente</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Nome Completo *</label>
+                                <input id="pay-name" type="text" required placeholder="Ex: António Silva" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:border-anca-green outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Email para Comprovativo *</label>
+                                <input id="pay-email" type="email" required placeholder="antonio@exemplo.pt" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:border-anca-green outline-none text-sm">
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="checkout-total-row">
-                    <span>Total a Pagar:</span>
-                    <strong id="checkoutTotalPrice">6.00 €</strong>
-                </div>
+                    <div>
+                        <h4 class="font-display font-bold text-lg text-anca-dark uppercase mb-3">2. Escolha o Método de Pagamento</h4>
+                        <!-- Botões dos Métodos -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
+                            <button type="button" onclick="selectPaymentMethod('mbway')" id="pm-btn-mbway" class="pm-btn p-3 rounded-xl border-2 border-anca-green bg-anca-light text-anca-dark font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer">
+                                <span class="px-2 py-0.5 rounded bg-red-600 text-white font-extrabold text-[10px]">MB WAY</span>
+                                <span>Telemóvel</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('multibanco')" id="pm-btn-multibanco" class="pm-btn p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer">
+                                <span class="px-2 py-0.5 rounded bg-blue-800 text-white font-extrabold text-[10px]">MB</span>
+                                <span>Multibanco</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('paypal')" id="pm-btn-paypal" class="pm-btn p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer">
+                                <span class="px-2 py-0.5 rounded bg-[#003087] text-white font-extrabold text-[10px]">PayPal</span>
+                                <span>Conta PayPal</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('cartao')" id="pm-btn-cartao" class="pm-btn p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 cursor-pointer">
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-white font-extrabold text-[10px]">VISA / MC</span>
+                                <span>Cartão</span>
+                            </button>
+                        </div>
 
-                <button class="btn btn-primary btn-block mt-3" onclick="processPayment()"><i class="fa-solid fa-shield-check"></i> Confirmar & Pagar com Segurança</button>
+                        <!-- Painel Dinâmico MB WAY -->
+                        <div id="pm-panel-mbway" class="pm-panel p-4 rounded-xl bg-anca-offwhite border border-emerald-200 space-y-3">
+                            <p class="text-xs text-slate-600">Introduza o seu número de telemóvel associado ao <strong>MB WAY</strong>. Receberá uma notificação na app para confirmar o pagamento em 4 minutos.</p>
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Número de Telemóvel (+351) *</label>
+                                <input id="mbway-phone" type="tel" maxlength="9" placeholder="912345678" class="w-full sm:w-64 px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:border-anca-green outline-none text-sm font-semibold tracking-wider">
+                            </div>
+                        </div>
+
+                        <!-- Painel Dinâmico Multibanco -->
+                        <div id="pm-panel-multibanco" class="pm-panel hidden p-4 rounded-xl bg-anca-offwhite border border-emerald-200 space-y-3">
+                            <p class="text-xs text-slate-600">Será gerada imediatamente uma <strong>Referência Multibanco</strong> válida para pagamento em qualquer caixa Multibanco ou Homebanking.</p>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 grid grid-cols-3 gap-2 text-center">
+                                <div>
+                                    <span class="block text-[10px] uppercase text-slate-400 font-bold">Entidade</span>
+                                    <span class="font-display font-bold text-lg text-anca-dark">21800</span>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] uppercase text-slate-400 font-bold">Referência</span>
+                                    <span id="mb-ref-preview" class="font-display font-bold text-lg text-anca-green">194 100 651</span>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] uppercase text-slate-400 font-bold">Valor</span>
+                                    <span id="mb-val-preview" class="font-display font-bold text-lg text-anca-dark">0,00€</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Painel Dinâmico PayPal -->
+                        <div id="pm-panel-paypal" class="pm-panel hidden p-4 rounded-xl bg-anca-offwhite border border-emerald-200 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="px-3 py-1.5 rounded-lg bg-[#003087] text-white font-bold text-sm">PayPal</div>
+                                <p class="text-xs text-slate-600">Pagamento internacional seguro através da sua conta <strong>PayPal</strong> ou cartão associado, com proteção ao comprador.</p>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Email da Conta PayPal *</label>
+                                <input id="paypal-email" type="email" placeholder="conta.paypal@exemplo.com" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:border-anca-green outline-none text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Painel Dinâmico Cartão -->
+                        <div id="pm-panel-cartao" class="pm-panel hidden p-4 rounded-xl bg-anca-offwhite border border-emerald-200 space-y-3">
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Número do Cartão *</label>
+                                <input id="cc-number" type="text" maxlength="19" placeholder="0000 0000 0000 0000" oninput="formatCardNumber(this)" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:border-anca-green outline-none text-sm font-mono">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Validade (MM/AA) *</label>
+                                    <input id="cc-expiry" type="text" maxlength="5" placeholder="09/29" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:border-anca-green outline-none text-sm font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Código CVV *</label>
+                                    <input id="cc-cvv" type="password" maxlength="3" placeholder="123" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:border-anca-green outline-none text-sm font-mono">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="payment-error-msg" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold"></div>
+
+                    <button type="button" onclick="processPayment()" class="w-full py-3.5 px-6 rounded-xl bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase tracking-wider text-base shadow-lg transition-all cursor-pointer">
+                        Confirmar e Efetuar Pagamento
+                    </button>
+                </div>
             </div>
 
-            <!-- Recibo de Sucesso -->
-            <div id="checkoutSuccessReceipt" class="receipt-box" style="display:none;">
-                <div class="receipt-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <h3>Pagamento Efetuado com Sucesso!</h3>
-                <p>Obrigado por apoiar o Ançã Futebol Clube. O seu recibo digital e comprovativo foram gerados.</p>
-                <div class="receipt-details">
-                    <p><strong>Transação ID:</strong> #AFC-892143</p>
-                    <p><strong>Comprador:</strong> <span id="receiptName"></span></p>
-                    <p><strong>Artigo:</strong> <span id="receiptItem"></span></p>
-                    <p><strong>Valor:</strong> <span id="receiptPrice"></span></p>
-                    <p><strong>Estado:</strong> Confirmado & Liquidado</p>
+            <!-- Ecrã de Confirmação / Recibo Digital -->
+            <div id="checkout-receipt" class="hidden p-6 sm:p-8 text-center max-w-xl mx-auto">
+                <div class="w-16 h-16 rounded-full bg-anca-light text-anca-green flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                 </div>
-                <button class="btn btn-outline btn-block mt-3" onclick="closeCheckout()"><i class="fa-solid fa-check"></i> Concluir</button>
+                <span class="px-3 py-1 rounded-full bg-anca-green text-white text-xs font-bold uppercase tracking-wider">Transação Concluída</span>
+                <h4 class="font-display font-bold text-2xl sm:text-3xl text-anca-dark uppercase mt-3 mb-2">Pagamento Registado com Sucesso!</h4>
+                <p id="receipt-subtitle" class="text-sm text-slate-600 mb-5"></p>
+
+                <div class="bg-anca-offwhite rounded-2xl p-5 border border-emerald-200 text-left text-xs space-y-2 mb-6">
+                    <div class="flex justify-between"><span class="text-slate-500">N.º Comprovativo:</span><strong id="rec-id" class="text-anca-dark font-mono">AFC-2026-8841</strong></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Titular:</span><strong id="rec-name" class="text-anca-dark"></strong></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Método Utilizado:</span><strong id="rec-method" class="text-anca-green uppercase"></strong></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Total Liquidado:</span><strong id="rec-total" class="text-anca-dark text-sm"></strong></div>
+                    <div id="rec-extra-info" class="pt-2 border-t border-emerald-200/70 text-slate-600"></div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button type="button" onclick="window.print()" class="px-5 py-2.5 rounded-xl bg-anca-offwhite hover:bg-anca-light text-anca-dark border border-emerald-200 font-semibold text-xs cursor-pointer">
+                        Imprimir Comprovativo
+                    </button>
+                    <button type="button" onclick="resetAndCloseCheckout()" class="px-6 py-2.5 rounded-xl bg-anca-green text-white font-display font-bold uppercase tracking-wider text-xs cursor-pointer">
+                        Concluir e Voltar ao Site
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DE LEITURA DE NOTÍCIAS -->
-    <div class="modal-overlay" id="newsModal">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closeNewsModal()"><i class="fa-solid fa-xmark"></i></button>
-            <h3 id="newsModalTitle" style="color: #007A43; margin-bottom: 15px;"></h3>
-            <p id="newsModalBody" style="line-height: 1.6; color: #444; font-size: 1.05rem;"></p>
-            <button class="btn btn-primary btn-block mt-4" onclick="closeNewsModal()">Fechar Leitura</button>
+    <!-- =====================================================================
+         MODAL: INSCRIÇÃO NAS CAPTAÇÕES DE FORMAÇÃO
+    ====================================================================== -->
+    <div id="captacoes-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-anca-dark/80 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-emerald-100">
+            <div class="bg-anca-dark px-6 py-4 flex items-center justify-between border-b-4 border-anca-green">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-anca-vibrant block">Academia Ançã FC</span>
+                    <h3 class="font-display font-bold text-xl text-white uppercase">Inscrição nas Captações</h3>
+                </div>
+                <button onclick="closeModal('captacoes-modal')" class="text-white/70 hover:text-white p-1.5 cursor-pointer">✕</button>
+            </div>
+            <div class="p-6">
+                <form id="captacoes-form" onsubmit="submitCaptacoes(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Nome do Atleta *</label>
+                        <input type="text" required placeholder="Nome completo do jovem atleta" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-anca-green">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Ano Nascimento *</label>
+                            <input type="number" min="2007" max="2021" required placeholder="2014" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-anca-green">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Telemóvel Enc. Ed. *</label>
+                            <input type="tel" required placeholder="912 345 678" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-anca-green">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Escalão</label>
+                        <input id="captacoes-escalao-input" type="text" readonly class="w-full px-3.5 py-2.5 rounded-xl bg-anca-light border border-anca-green/20 text-anca-dark font-semibold text-sm">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase tracking-wider text-sm cursor-pointer">
+                        Enviar Pedido de Treino Experimental
+                    </button>
+                </form>
+                <div id="captacoes-success" class="hidden text-center py-4">
+                    <p class="font-display font-bold text-xl text-anca-green uppercase mb-2">Inscrição Enviada!</p>
+                    <p class="text-sm text-slate-600 mb-4">A coordenação técnica da formação entrará em contacto para agendar o treino no Parque Desportivo de Ançã.</p>
+                    <button onclick="closeModal('captacoes-modal')" class="px-5 py-2 rounded-xl bg-anca-dark text-white text-xs font-bold uppercase cursor-pointer">Fechar</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT JS -->
-    <script src="app.js"></script>
+    <!-- =====================================================================
+         MODAL: MAPA INTERATIVO DO ESTÁDIO
+    ====================================================================== -->
+    <div id="map-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-anca-dark/80 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl border border-emerald-100 flex flex-col">
+            <div class="bg-anca-dark px-6 py-4 flex items-center justify-between border-b-4 border-anca-green">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-anca-vibrant block">Localização GPS</span>
+                    <h3 class="font-display font-bold text-lg text-white uppercase">Parque Desportivo de Ançã</h3>
+                </div>
+                <button onclick="closeModal('map-modal')" class="text-white/70 hover:text-white p-1.5 cursor-pointer">✕</button>
+            </div>
+            <div class="w-full h-80 bg-anca-offwhite">
+                <iframe title="Mapa Parque Desportivo de Ançã" src="https://maps.google.com/maps?q=Parque%20Desportivo%20de%20Anca%20Campo%20Dr%20Americo%20Couto%20Cantanhede&t=&z=16&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0" loading="lazy"></iframe>
+            </div>
+            <div class="p-4 bg-anca-offwhite flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span class="font-semibold text-anca-dark">Campo Dr. Américo Couto • 3060-027 Ançã, Cantanhede</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Parque+Desportivo+de+Anca+Campo+Dr+Americo+Couto+Cantanhede" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-anca-green text-white font-display font-bold uppercase">Abrir Navegação Google Maps →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL: LEITURA DE NOTÍCIA
+    ====================================================================== -->
+    <div id="news-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-anca-dark/80 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
+            <div class="relative h-56 flex-shrink-0">
+                <img id="news-modal-img" src="" alt="Notícia Ançã FC" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-anca-dark via-anca-dark/40 to-transparent"></div>
+                <button onclick="closeModal('news-modal')" class="absolute top-4 right-4 bg-anca-dark/80 text-white w-8 h-8 rounded-full cursor-pointer">✕</button>
+                <div class="absolute bottom-4 left-6 right-6">
+                    <span id="news-modal-category" class="inline-block bg-anca-vibrant text-anca-dark font-display font-bold text-xs uppercase px-2.5 py-0.5 rounded mb-1"></span>
+                    <h3 id="news-modal-title" class="font-display font-bold text-2xl text-white uppercase"></h3>
+                </div>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-3 text-slate-600 text-sm leading-relaxed">
+                <p id="news-modal-date" class="text-xs font-bold uppercase text-slate-400"></p>
+                <div id="news-modal-body" class="space-y-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL: INSPETOR DE CÓDIGO SEPARADO (index.html / style.css / app.js)
+    ====================================================================== -->
+    <div id="source-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-anca-dark/85 backdrop-blur-sm">
+        <div class="bg-slate-900 text-white rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl border border-anca-green flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 bg-anca-dark border-b border-white/10 flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-anca-vibrant block">Arquitetura Modular</span>
+                    <h3 class="font-display font-bold text-lg uppercase">Código Separado em 3 Ficheiros</h3>
+                </div>
+                <button onclick="closeModal('source-modal')" class="text-white/70 hover:text-white p-1.5 cursor-pointer">✕</button>
+            </div>
+            <div class="px-6 pt-3 bg-slate-950 border-b border-white/10 flex items-center justify-between gap-2">
+                <div class="flex gap-2">
+                    <button onclick="showCodeTab('html')" id="ctab-html" class="ctab px-3.5 py-2 rounded-t-lg bg-anca-green text-white text-xs font-mono font-bold cursor-pointer">index.html</button>
+                    <button onclick="showCodeTab('css')" id="ctab-css" class="ctab px-3.5 py-2 rounded-t-lg bg-slate-800 text-slate-300 text-xs font-mono font-bold cursor-pointer">style.css</button>
+                    <button onclick="showCodeTab('js')" id="ctab-js" class="ctab px-3.5 py-2 rounded-t-lg bg-slate-800 text-slate-300 text-xs font-mono font-bold cursor-pointer">app.js</button>
+                </div>
+                <button onclick="copySeparatedCode(this)" class="px-3 py-1.5 rounded bg-anca-vibrant text-anca-dark text-xs font-bold uppercase cursor-pointer">Copiar Ficheiro</button>
+            </div>
+            <pre id="code-viewer-box" class="p-5 overflow-auto text-xs font-mono text-emerald-200 bg-slate-950 leading-relaxed flex-grow"></pre>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT DA APLICAÇÃO (NAVEGAÇÃO, PLANTEL, LOJA, PAGAMENTOS)
+    ====================================================================== -->
+    <script>
+        /* -------------------------------------------------------------------
+           1. NAVEGAÇÃO AUTÓNOMA ENTRE PÁGINAS (SEM SCROLL FORÇADO)
+        -------------------------------------------------------------------- */
+        function navigateTo(pageId) {
+            // Esconder todas as vistas
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active');
+            });
+
+            // Mostrar a vista selecionada
+            const targetView = document.getElementById('page-' + pageId);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+
+            // Atualizar estado ativo nos menus desktop e mobile
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                if (btn.dataset.page === pageId) {
+                    btn.classList.add('active-nav');
+                } else {
+                    btn.classList.remove('active-nav');
+                }
+            });
+
+            closeMobileDrawer();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Controlo do Drawer Mobile
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const mobileOverlay = document.getElementById('mobile-drawer-overlay');
+        document.getElementById('mobile-drawer-btn').addEventListener('click', () => {
+            mobileOverlay.classList.remove('hidden');
+            mobileDrawer.classList.remove('translate-x-full');
+        });
+
+        function closeMobileDrawer() {
+            mobileOverlay.classList.add('hidden');
+            mobileDrawer.classList.add('translate-x-full');
+        }
+
+        /* -------------------------------------------------------------------
+           2. CONTADOR DECRESCENTE PARA O PRÓXIMO JOGO
+        -------------------------------------------------------------------- */
+        function getNextSunday15h() {
+            const now = new Date();
+            const target = new Date(now);
+            let daysUntilSunday = (7 - now.getDay()) % 7;
+            if (daysUntilSunday === 0 && now.getHours() >= 15) daysUntilSunday = 7;
+            target.setDate(now.getDate() + daysUntilSunday);
+            target.setHours(15, 0, 0, 0);
+            return target.getTime();
+        }
+        const matchTimestamp = getNextSunday15h();
+
+        function updateCountdown() {
+            const diff = matchTimestamp - Date.now();
+            if (diff <= 0) return;
+            document.getElementById('cd-days').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('cd-minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('cd-seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        /* -------------------------------------------------------------------
+           3. DADOS E RENDERIZAÇÃO DO PLANTEL SÉNIOR
+        -------------------------------------------------------------------- */
+        const squadPlayers = [
+            { num: 1, name: 'Diogo Tavares', pos: 'Guarda-Redes', age: 26 },
+            { num: 12, name: 'Gonçalo Reis', pos: 'Guarda-Redes', age: 21 },
+            { num: 2, name: 'Tiago Bastos', pos: 'Defesa', age: 25 },
+            { num: 4, name: 'Ricardo Sousa', pos: 'Defesa', age: 29 },
+            { num: 5, name: 'André Oliveira', pos: 'Defesa', age: 27 },
+            { num: 3, name: 'João Pedro', pos: 'Defesa', age: 23 },
+            { num: 6, name: 'Rúben Silva', pos: 'Médio', age: 28 },
+            { num: 8, name: 'Filipe Matos', pos: 'Médio', age: 24 },
+            { num: 10, name: 'Pedro Almeida', pos: 'Médio', age: 27 },
+            { num: 7, name: 'Miguel Neves', pos: 'Avançado', age: 23 },
+            { num: 9, name: 'Hugo Costa', pos: 'Avançado', age: 26 },
+            { num: 11, name: 'Rafael Santos', pos: 'Avançado', age: 22 }
+        ];
+
+        function filterSquad(position) {
+            const grid = document.getElementById('squad-grid');
+            const list = position === 'TODOS' ? squadPlayers : squadPlayers.filter(p => p.pos === position);
+            grid.innerHTML = list.map(p => `
+                <div class="bg-anca-offwhite rounded-2xl p-5 border border-emerald-100 hover:border-anca-green transition-all flex items-center justify-between shadow-sm">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-anca-green">${p.pos}</span>
+                        <h4 class="font-display font-bold text-xl text-anca-dark uppercase mt-0.5">${p.name}</h4>
+                        <span class="text-xs text-slate-500">${p.age} anos • Sénior</span>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-anca-dark text-anca-vibrant font-display font-bold text-2xl flex items-center justify-center border-b-2 border-anca-vibrant">
+                        ${p.num}
+                    </div>
+                </div>
+            `).join('');
+        }
+        filterSquad('TODOS');
+
+        function switchFutebolTab(tab) {
+            document.querySelectorAll('.ftab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('ftab-' + tab).classList.remove('hidden');
+
+            document.querySelectorAll('.ftab-btn').forEach(btn => {
+                btn.classList.remove('bg-anca-green', 'text-white');
+                btn.classList.add('bg-anca-offwhite', 'text-anca-dark');
+            });
+            const activeBtn = document.getElementById('ftab-btn-' + tab);
+            activeBtn.classList.remove('bg-anca-offwhite', 'text-anca-dark');
+            activeBtn.classList.add('bg-anca-green', 'text-white');
+        }
+
+        /* -------------------------------------------------------------------
+           4. LOJA OFICIAL & RENDERIZAÇÃO DE PRODUTOS
+        -------------------------------------------------------------------- */
+        const storeProducts = [
+            {
+                id: 'camisola-principal',
+                name: 'Camisola Principal Alviverde 26/27',
+                category: 'Equipamento Oficial',
+                price: 35.00,
+                desc: 'Riscas verticais verde e branco com emblema bordado no peito e tecido respirável.',
+                badge: 'Novo 26/27'
+            },
+            {
+                id: 'camisola-alternativa',
+                name: 'Camisola Alternativa Pedra de Ançã',
+                category: 'Equipamento Oficial',
+                price: 35.00,
+                desc: 'Branco puro inspirado na Pedra de Ançã com detalhes em verde esmeralda.',
+                badge: 'Edição Especial'
+            },
+            {
+                id: 'cachecol-oficial',
+                name: 'Cachecol Oficial Ançã Futebol Clube',
+                category: 'Acessórios',
+                price: 12.00,
+                desc: 'Cachecol jacquard de dupla face com inscrição "Orgulho Alviverde • Desde 1941".',
+                badge: 'Mais Vendido'
+            },
+            {
+                id: 'fato-treino',
+                name: 'Fato de Treino Oficial de Passeio',
+                category: 'Treino & Passeio',
+                price: 48.00,
+                desc: 'Conjunto técnico verde escuro e branco utilizado pelo plantel sénior.',
+                badge: 'Plantel'
+            },
+            {
+                id: 'bone-afc',
+                name: 'Boné Oficial Escudo Bordado',
+                category: 'Acessórios',
+                price: 10.00,
+                desc: 'Boné ajustável verde clube com o escudo coroado do Ançã FC em relevo.',
+                badge: 'Clássico'
+            },
+            {
+                id: 'galhardete',
+                name: 'Galhardete Comemorativo 85 Anos',
+                category: 'Colecionismo',
+                price: 8.50,
+                desc: 'Galhardete oficial em cetim branco com franja verde para colecionadores.',
+                badge: 'Coleção'
+            }
+        ];
+
+        function renderStore() {
+            const grid = document.getElementById('store-grid');
+            grid.innerHTML = storeProducts.map(item => `
+                <div class="bg-white rounded-2xl border border-emerald-100 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 pitch-pattern relative flex items-center justify-center p-6">
+                            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded bg-anca-vibrant text-anca-dark font-display font-bold text-[11px] uppercase">${item.badge}</span>
+                            <div class="w-20 h-20 rounded-full bg-white p-2 shadow-lg">
+                                <svg viewBox="0 0 200 245" class="w-full h-full"><use href="#anca-official-crest"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-anca-green">${item.category}</span>
+                            <h3 class="font-display font-bold text-xl text-anca-dark uppercase mt-1 mb-2">${item.name}</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <span class="font-display font-bold text-2xl text-anca-dark">${item.price.toFixed(2).replace('.', ',')}€</span>
+                        <button onclick="addToCart('${item.id}', '${item.name}', ${item.price}, '${item.category}', true)" class="px-4 py-2.5 rounded-xl bg-anca-green hover:bg-anca-deep text-white font-display font-bold uppercase text-xs tracking-wider shadow cursor-pointer">
+                            Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        renderStore();
+
+        /* -------------------------------------------------------------------
+           5. NOTÍCIAS & FILTROS
+        -------------------------------------------------------------------- */
+        const newsArticles = [
+            {
+                category: 'Equipa Sénior',
+                date: '15 de Novembro, 2026',
+                title: 'Triunfo categórico fora de portas reforça ambição na Divisão de Honra',
+                image: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80',
+                excerpt: 'Vitória por 1-3 na deslocação ao campo do Febres SC mantém o Ançã FC na luta direta pela liderança.',
+                paragraphs: [
+                    'A equipa principal do Ançã Futebol Clube conquistou uma vitória expressiva por 1-3 na deslocação ao campo do Febres SC.',
+                    'Com uma exibição solidária e eficaz, o conjunto alviverde somou três pontos fundamentais antes da receção à AD Nogueirense no Parque Desportivo de Ançã.'
+                ]
+            },
+            {
+                category: 'Formação',
+                date: '10 de Novembro, 2026',
+                title: 'Torneio de Outono reúne mais de 200 jovens atletas no Parque Desportivo',
+                image: 'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=800&q=80',
+                excerpt: 'Um dia de convívio e desportivismo na vila de Ançã com oito clubes convidados do distrito de Coimbra.',
+                paragraphs: [
+                    'O Parque Desportivo de Ançã encheu-se de famílias e jovens futebolistas durante o Torneio de Outono dos escalões de Traquinas e Benjamins.',
+                    'A iniciativa reforçou o papel formativo do Ançã FC no concelho de Cantanhede.'
+                ]
+            },
+            {
+                category: 'Institucional',
+                date: '03 de Novembro, 2026',
+                title: 'Modernização da iluminação LED e novos pagamentos digitais para sócios',
+                image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80',
+                excerpt: 'O clube concluiu a instalação de projetores LED e lançou o portal de pagamentos por MB WAY, Multibanco e PayPal.',
+                paragraphs: [
+                    'Prosseguindo a modernização do clube, os sócios e adeptos já podem liquidar quotas anuais, bilhetes e artigos da loja oficial através de MB WAY, Referência Multibanco, PayPal ou Cartão.',
+                    'No plano das infraestruturas, a nova iluminação LED do Campo Dr. Américo Couto já está operacional.'
+                ]
+            }
+        ];
+
+        function filterNews(cat) {
+            const grid = document.getElementById('news-grid');
+            const filtered = cat === 'TODAS' ? newsArticles : newsArticles.filter(n => n.category === cat);
+            grid.innerHTML = filtered.map((n, idx) => `
+                <article class="bg-anca-offwhite rounded-2xl overflow-hidden border border-emerald-100 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48">
+                            <img src="${n.image}" alt="${n.title}" onerror="this.src='https://placehold.co/800x500/007A43/FFFFFF?text=Anca+FC'" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-anca-dark text-anca-vibrant font-display font-bold text-xs uppercase px-2.5 py-0.5 rounded">${n.category}</span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-slate-400">${n.date}</span>
+                            <h3 class="font-display font-bold text-xl text-anca-dark uppercase mt-1 mb-2">${n.title}</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">${n.excerpt}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-5">
+                        <button onclick="openNewsModal(${newsArticles.indexOf(n)})" class="text-xs font-bold uppercase text-anca-green hover:underline cursor-pointer">Ler notícia completa →</button>
+                    </div>
+                </article>
+            `).join('');
+        }
+        filterNews('TODAS');
+
+        function openNewsModal(idx) {
+            const art = newsArticles[idx];
+            if (!art) return;
+            document.getElementById('news-modal-img').src = art.image;
+            document.getElementById('news-modal-category').textContent = art.category;
+            document.getElementById('news-modal-title').textContent = art.title;
+            document.getElementById('news-modal-date').textContent = art.date;
+            document.getElementById('news-modal-body').innerHTML = art.paragraphs.map(p => `<p>${p}</p>`).join('');
+            openModal('news-modal');
+        }
+
+        /* -------------------------------------------------------------------
+           6. SIMULADOR CARTÃO DE SÓCIO & CAPTAÇÕES
+        -------------------------------------------------------------------- */
+        function updateMemberCardPreview(val) {
+            const nameEl = document.getElementById('card-preview-name');
+            nameEl.textContent = val.trim() ? val.trim().toUpperCase() : 'O TEU NOME AQUI';
+        }
+        function setCardCategory(cat) {
+            document.getElementById('card-preview-badge').textContent = cat;
+        }
+
+        function openCaptacoesModal(escalao) {
+            document.getElementById('captacoes-form').reset();
+            document.getElementById('captacoes-form').classList.remove('hidden');
+            document.getElementById('captacoes-success').classList.add('hidden');
+            document.getElementById('captacoes-escalao-input').value = escalao;
+            openModal('captacoes-modal');
+        }
+        function submitCaptacoes(e) {
+            e.preventDefault();
+            document.getElementById('captacoes-form').classList.add('hidden');
+            document.getElementById('captacoes-success').classList.remove('hidden');
+        }
+
+        /* -------------------------------------------------------------------
+           7. SISTEMA DE CARRINHO & PAGAMENTOS (MB WAY, MULTIBANCO, PAYPAL, CARTÃO)
+        -------------------------------------------------------------------- */
+        let cart = [
+            { id: 'quota-efetivo', name: 'Quota Anual: Sócio Efetivo (2026/27)', price: 30.00, category: 'Quotas de Sócio', qty: 1 }
+        ];
+        let selectedPaymentMethod = 'mbway';
+
+        function updateCartBadges() {
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cart-badge').textContent = totalQty;
+            const storeBadge = document.getElementById('store-cart-count');
+            if (storeBadge) storeBadge.textContent = totalQty;
+        }
+        updateCartBadges();
+
+        function addToCart(id, name, price, category, openModalAfter = false) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ id, name, price, category, qty: 1 });
+            }
+            updateCartBadges();
+            renderCheckoutItems();
+            if (openModalAfter) {
+                openCheckoutModal();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartBadges();
+            renderCheckoutItems();
+        }
+
+        function renderCheckoutItems() {
+            const container = document.getElementById('checkout-items-list');
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const totalEl = document.getElementById('checkout-total');
+            const mbValEl = document.getElementById('mb-val-preview');
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic py-4 text-center">O carrinho está vazio. Utilize os botões abaixo para adicionar uma quota, bilhete ou artigo da loja.</p>`;
+                subtotalEl.textContent = '0,00€';
+                totalEl.textContent = '0,00€';
+                if (mbValEl) mbValEl.textContent = '0,00€';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                const lineTotal = item.price * item.qty;
+                total += lineTotal;
+                return `
+                    <div class="bg-white p-3 rounded-xl border border-emerald-100 flex items-center justify-between gap-2 text-xs">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase text-anca-green block">${item.category}</span>
+                            <strong class="text-anca-dark block">${item.name}</strong>
+                            <span class="text-slate-500">Qtd: ${item.qty} × ${item.price.toFixed(2).replace('.', ',')}€</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-display font-bold text-sm text-anca-dark">${lineTotal.toFixed(2).replace('.', ',')}€</span>
+                            <button type="button" onclick="removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 p-1 cursor-pointer" title="Remover">✕</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const formattedTotal = total.toFixed(2).replace('.', ',') + '€';
+            subtotalEl.textContent = formattedTotal;
+            totalEl.textContent = formattedTotal;
+            if (mbValEl) mbValEl.textContent = formattedTotal;
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.pm-btn').forEach(btn => {
+                btn.classList.remove('border-2', 'border-anca-green', 'bg-anca-light', 'text-anca-dark');
+                btn.classList.add('border', 'border-slate-200', 'bg-white', 'text-slate-700');
+            });
+            const activeBtn = document.getElementById('pm-btn-' + method);
+            activeBtn.classList.remove('border', 'border-slate-200', 'bg-white', 'text-slate-700');
+            activeBtn.classList.add('border-2', 'border-anca-green', 'bg-anca-light', 'text-anca-dark');
+
+            document.querySelectorAll('.pm-panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById('pm-panel-' + method).classList.remove('hidden');
+            document.getElementById('payment-error-msg').classList.add('hidden');
+        }
+
+        function formatCardNumber(input) {
+            let v = input.value.replace(/\D/g, '').substring(0, 16);
+            input.value = v.replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function openCheckoutModal() {
+            document.getElementById('checkout-body').classList.remove('hidden');
+            document.getElementById('checkout-receipt').classList.add('hidden');
+            document.getElementById('payment-error-msg').classList.add('hidden');
+            renderCheckoutItems();
+            openModal('checkout-modal');
+        }
+
+        function processPayment() {
+            const errBox = document.getElementById('payment-error-msg');
+            errBox.classList.add('hidden');
+
+            if (cart.length === 0) {
+                errBox.textContent = 'Adicione pelo menos um item (Quota, Bilhete ou Artigo da Loja) antes de pagar.';
+                errBox.classList.remove('hidden');
+                return;
+            }
+
+            const name = document.getElementById('pay-name').value.trim();
+            const email = document.getElementById('pay-email').value.trim();
+
+            if (!name || !email) {
+                errBox.textContent = 'Por favor, preencha o seu Nome Completo e Email para envio do comprovativo.';
+                errBox.classList.remove('hidden');
+                return;
+            }
+
+            let extraReceiptInfo = '';
+            let methodLabel = '';
+
+            if (selectedPaymentMethod === 'mbway') {
+                const phone = document.getElementById('mbway-phone').value.replace(/\D/g, '');
+                if (phone.length !== 9) {
+                    errBox.textContent = 'Introduza um número de telemóvel português válido com 9 dígitos para o MB WAY.';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+                methodLabel = 'MB WAY (+351 ' + phone + ')';
+                extraReceiptInfo = 'Notificação push enviada para a aplicação MB WAY do telemóvel +351 ' + phone + '. Pagamento confirmado.';
+            } else if (selectedPaymentMethod === 'multibanco') {
+                const ref = Math.floor(100000000 + Math.random() * 899999999).toString().replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+                methodLabel = 'Referência Multibanco';
+                extraReceiptInfo = `<strong>Dados para Pagamento Multibanco:</strong> Entidade: <strong>21800</strong> | Referência: <strong>${ref}</strong> (Válida por 48 horas).`;
+            } else if (selectedPaymentMethod === 'paypal') {
+                const ppEmail = document.getElementById('paypal-email').value.trim();
+                if (!ppEmail) {
+                    errBox.textContent = 'Por favor, indique o email associado à sua conta PayPal.';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+                methodLabel = 'PayPal (' + ppEmail + ')';
+                extraReceiptInfo = 'Transação autorizada via PayPal Checkout. Comprovativo enviado para ' + email + '.';
+            } else if (selectedPaymentMethod === 'cartao') {
+                const cc = document.getElementById('cc-number').value.replace(/\s/g, '');
+                const exp = document.getElementById('cc-expiry').value.trim();
+                const cvv = document.getElementById('cc-cvv').value.trim();
+                if (cc.length < 16 || exp.length < 4 || cvv.length < 3) {
+                    errBox.textContent = 'Verifique os dados do Cartão de Crédito/Débito (16 dígitos, validade e CVV).';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+                methodLabel = 'Cartão Bancário (•••• ' + cc.slice(-4) + ')';
+                extraReceiptInfo = 'Pagamento por cartão processado com segurança 3D Secure.';
+            }
+
+            const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2).replace('.', ',') + '€';
+            const txId = 'AFC-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+
+            document.getElementById('rec-id').textContent = txId;
+            document.getElementById('rec-name').textContent = name;
+            document.getElementById('rec-method').textContent = methodLabel;
+            document.getElementById('rec-total').textContent = total;
+            document.getElementById('rec-extra-info').innerHTML = extraReceiptInfo;
+            document.getElementById('receipt-subtitle').textContent = `Enviámos o recibo oficial e os detalhes da encomenda para ${email}.`;
+
+            document.getElementById('checkout-body').classList.add('hidden');
+            document.getElementById('checkout-receipt').classList.remove('hidden');
+        }
+
+        function resetAndCloseCheckout() {
+            cart = [];
+            updateCartBadges();
+            closeModal('checkout-modal');
+        }
+
+        /* -------------------------------------------------------------------
+           8. UTILITÁRIOS GERAIS (MODAIS, MAPA, COPIAR MORADA, CÓDIGO SEPARADO)
+        -------------------------------------------------------------------- */
+        function openModal(id) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            const el = document.getElementById(id);
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        function openMapModal() { openModal('map-modal'); }
+
+        function copyStadiumAddress(btn) {
+            const address = 'Parque Desportivo de Ançã, Campo Dr. Américo Couto, 3060-027 Ançã, Cantanhede';
+            const temp = document.createElement('textarea');
+            temp.value = address;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+
+            const label = btn.querySelector('.copy-label');
+            if (label) {
+                const orig = label.textContent;
+                label.textContent = 'Morada Copiada!';
+                setTimeout(() => label.textContent = orig, 2000);
+            }
+        }
+
+        // Inspetor de Código Separado (HTML / CSS / JS)
+        const separatedCodeSnippets = {
+            html: `<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ançã Futebol Clube | Site Oficial</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Barra de Navegação Autónoma Multi-Página -->
+    <header class="sticky top-0 z-40 bg-[#02301B] text-white border-b-4 border-[#007A43]">
+        <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <button onclick="navigateTo('inicio')" class="font-bold uppercase">Ançã FC</button>
+            <div class="flex gap-2">
+                <button onclick="navigateTo('inicio')" class="nav-link active-nav">Início</button>
+                <button onclick="navigateTo('clube')" class="nav-link">O Clube</button>
+                <button onclick="navigateTo('futebol')" class="nav-link">Futebol</button>
+                <button onclick="navigateTo('socios')" class="nav-link">Sócios</button>
+                <button onclick="navigateTo('loja')" class="nav-link">Loja</button>
+                <button onclick="navigateTo('noticias')" class="nav-link">Notícias</button>
+            </div>
+            <button onclick="openCheckoutModal()">Pagamentos (<span id="cart-badge">0</span>)</button>
+        </nav>
+    </header>
+
+    <!-- Vistas Independentes -->
+    <main>
+        <section id="page-inicio" class="page-view active">...</section>
+        <section id="page-clube" class="page-view">...</section>
+        <section id="page-futebol" class="page-view">...</section>
+        <section id="page-socios" class="page-view">...</section>
+        <section id="page-loja" class="page-view">...</section>
+        <section id="page-noticias" class="page-view">...</section>
+    </main>
+
+    <script src="app.js"><\/script>
+</body>
+</html>`,
+            css: `/* =====================================================
+   style.css - Identidade Visual Alviverde Ançã FC
+===================================================== */
+:root {
+    --anca-dark: #02301B;
+    --anca-green: #007A43;
+    --anca-vibrant: #10B981;
+    --anca-offwhite: #F4F9F6;
+}
+
+.alviverde-stripes-light {
+    background-color: var(--anca-offwhite);
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(0, 122, 67, 0.03) 0px,
+        rgba(0, 122, 67, 0.03) 44px,
+        rgba(255, 255, 255, 0.65) 44px,
+        rgba(255, 255, 255, 0.65) 88px
+    );
+}
+
+.page-view {
+    display: none;
+    animation: pageFadeIn 0.35s ease forwards;
+}
+.page-view.active {
+    display: block;
+}
+
+.nav-link.active-nav {
+    background-color: var(--anca-green);
+    color: #FFFFFF;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}`,
+            js: `/* =====================================================
+   app.js - Navegação Autónoma & Pagamentos (MB WAY / MB / PayPal)
+===================================================== */
+function navigateTo(pageId) {
+    document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('page-' + pageId)?.classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(btn => {
+        btn.classList.toggle('active-nav', btn.dataset.page === pageId);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Gestão de Carrinho e Checkout Multi-Método
+let cart = [];
+let selectedPaymentMethod = 'mbway';
+
+function addToCart(id, name, price, category) {
+    const item = cart.find(i => i.id === id);
+    item ? item.qty++ : cart.push({ id, name, price, category, qty: 1 });
+    renderCheckoutItems();
+}
+
+function selectPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll('.pm-panel').forEach(p => p.classList.add('hidden'));
+    document.getElementById('pm-panel-' + method).classList.remove('hidden');
+}`
+        };
+
+        function openSourceCodeModal() {
+            showCodeTab('html');
+            openModal('source-modal');
+        }
+
+        function showCodeTab(lang) {
+            document.querySelectorAll('.ctab').forEach(b => {
+                b.classList.remove('bg-anca-green', 'text-white');
+                b.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            const active = document.getElementById('ctab-' + lang);
+            active.classList.remove('bg-slate-800', 'text-slate-300');
+            active.classList.add('bg-anca-green', 'text-white');
+            document.getElementById('code-viewer-box').textContent = separatedCodeSnippets[lang];
+        }
+
+        function copySeparatedCode(btn) {
+            const text = document.getElementById('code-viewer-box').textContent;
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            const orig = btn.textContent;
+            btn.textContent = 'Copiado!';
+            setTimeout(() => btn.textContent = orig, 1800);
+        }
+    </script>
 </body>
 </html>
