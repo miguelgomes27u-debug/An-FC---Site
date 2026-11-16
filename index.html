@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ançã Futebol Clube | Site Oficial</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CABEÇALHO & MENU INTERATIVO -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container top-bar-flex">
+                <div class="top-info">
+                    <span><i class="fa-solid fa-location-dot"></i> Parque Desportivo de Ançã, Cantanhede</span>
+                    <span><i class="fa-solid fa-envelope"></i> geral@ancafc.pt</span>
+                </div>
+                <div class="top-social">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="#" class="logo-link" onclick="switchView('inicio')">
+                    <div class="emblem-container">
+                        <svg viewBox="0 0 120 150" class="official-emblem" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M60 10 C45 10 35 25 35 25 C35 25 25 20 15 28 C5 36 12 50 12 50 C12 50 20 48 25 55 C30 62 25 72 25 72 C25 72 40 75 60 75 C80 75 95 72 95 72 C95 72 90 62 95 55 C100 48 108 50 108 50 C108 50 115 36 105 28 C95 20 85 25 85 25 C85 25 75 10 60 10 Z" fill="#007A43" stroke="#ffffff" stroke-width="2"/>
+                            <path d="M25 65 Q60 78 95 65 L95 82 C95 120 78 142 60 145 C42 142 25 120 25 82 Z" fill="#ffffff" stroke="#007A43" stroke-width="4"/>
+                            <path d="M32 75 Q60 86 88 75 L88 85 C88 116 74 135 60 138 C46 135 32 116 32 85 Z" fill="none" stroke="#007A43" stroke-width="1.5"/>
+                            <path d="M24 73 Q60 85 96 73" fill="none" stroke="#007A43" stroke-width="5"/>
+                            <text x="60" y="81" font-family="Montserrat" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">A F C</text>
+                            <circle cx="47" cy="98" r="6" fill="#007A43"/>
+                            <circle cx="73" cy="98" r="6" fill="#007A43"/>
+                            <circle cx="47" cy="112" r="6" fill="#007A43"/>
+                            <circle cx="73" cy="112" r="6" fill="#007A43"/>
+                            <circle cx="47" cy="126" r="6" fill="#007A43"/>
+                            <circle cx="73" cy="126" r="6" fill="#007A43"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="club-title">Ançã F.C.</span>
+                        <span class="club-subtitle">Fundado em 1932</span>
+                    </div>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" class="nav-link active" data-target="inicio" onclick="switchView('inicio')"><i class="fa-solid fa-house"></i> Início</a></li>
+                    <li><a href="#" class="nav-link" data-target="clube" onclick="switchView('clube')"><i class="fa-solid fa-shield-halved"></i> O Clube</a></li>
+                    <li><a href="#" class="nav-link" data-target="futebol" onclick="switchView('futebol')"><i class="fa-solid fa-futbol"></i> Futebol & Formação</a></li>
+                    <li><a href="#" class="nav-link" data-target="socios" onclick="switchView('socios')"><i class="fa-solid fa-id-card"></i> Sócios & Bilheteira</a></li>
+                    <li><a href="#" class="nav-link" data-target="loja" onclick="switchView('loja')"><i class="fa-solid fa-store"></i> Loja Oficial</a></li>
+                    <li><a href="#" class="nav-link" data-target="noticias" onclick="switchView('noticias')"><i class="fa-solid fa-newspaper"></i> Notícias</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO DINÂMICO DE VISTAS (SPA) -->
+    <main id="mainContent">
+        
+        <!-- VISTA: INÍCIO -->
+        <section id="view-inicio" class="view-section active">
+            <div class="hero-banner">
+                <div class="hero-overlay"></div>
+                <div class="container hero-content">
+                    <span class="hero-badge"><i class="fa-solid fa-star"></i> Orgãolhos Alviverdes da Beira Litoral</span>
+                    <h1>A Tradição e a Paixão<br><span>De Uma Vila, Um Clube!</span></h1>
+                    <p>Bem-vindo ao portal oficial do Ançã Futebol Clube. Acompanha a nossa equipa sénior, escalões de formação, sê sócio e veste as cores alviverdes.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="switchView('socios')"><i class="fa-solid fa-user-plus"></i> Tornar-me Sócio</button>
+                        <button class="btn btn-outline" onclick="switchView('futebol')"><i class="fa-solid fa-calendar-days"></i> Próximo Jogo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATCH CENTER DESTAQUE -->
+            <section class="section match-center-preview">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Próximo Encontro Oficial</h2>
+                        <p>Divisão de Elite Distrital AF Coimbra</p>
+                    </div>
+                    <div class="match-card-featured">
+                        <div class="match-meta">
+                            <span class="competition-tag">Campeonato Distrital</span>
+                            <span class="match-date"><i class="fa-regular fa-calendar"></i> Domingo, 22 Março | 15:00</span>
+                        </div>
+                        <div class="match-teams">
+                            <div class="team home">
+                                <div class="team-logo-placeholder"><i class="fa-solid fa-shield"></i></div>
+                                <h3>Ançã F.C.</h3>
+                            </div>
+                            <div class="match-vs">
+                                <span class="vs-badge">VS</span>
+                                <div class="countdown-timer" id="countdownTimer">
+                                    <div class="time-box"><span id="days">03</span><small>Dias</small></div>
+                                    <div class="time-box"><span id="hours">14</span><small>Horas</small></div>
+                                    <div class="time-box"><span id="mins">28</span><small>Min</small></div>
+                                </div>
+                            </div>
+                            <div class="team away">
+                                <div class="team-logo-placeholder"><i class="fa-solid fa-shield"></i></div>
+                                <h3>U.D. Tocha</h3>
+                            </div>
+                        </div>
+                        <div class="match-location-bar">
+                            <span><i class="fa-solid fa-location-dot"></i> <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="map-link">Parque Desportivo de Ançã (Campo Dr. Américo Couto)</a></span>
+                            <div class="match-actions">
+                                <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="btn btn-sm btn-outline"><i class="fa-solid fa-diamond-turn-right"></i> Direções GPS</a>
+                                <button class="btn btn-sm btn-primary" onclick="openTicketModal('Bilhete Jogo: Ançã FC vs UD Tocha', 6.00)"><i class="fa-solid fa-ticket"></i> Comprar Bilhete (6€)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- VISTA: O CLUBE -->
+        <section id="view-clube" class="view-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>História & Identidade</h2>
+                    <p>Quase um século de dedicação ao desporto e à comunidade de Ançã</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Fundado em 1932 na histórica vila de Ançã</h3>
+                        <p>O Ançã Futebol Clube é muito mais do que uma instituição desportiva; é o reflexo da alma e da união da freguesia de Ançã e do concelho de Cantanhede. Ao longo de mais de 90 anos de história, o clube tem sido um bastião na formação de jovens atletas e no desporto distrital de Coimbra.</p>
+                        <p>Com as inconfundíveis cores <strong>verde e branca</strong> e o emblema heráldico coroado com os tradicionais besantes, o Ançã FC continua a crescer com ambição, rigor e forte ligação à sua massa associativa.</p>
+                        <div class="club-stats">
+                            <div class="stat-box"><h4>1932</h4><small>Fundação</small></div>
+                            <div class="stat-box"><h4>90+</h4><small>Anos de História</small></div>
+                            <div class="stat-box"><h4>300+</h4><small>Atletas Formação</small></div>
+                        </div>
+                    </div>
+                    <div class="about-image-card">
+                        <div class="stadium-card-visual">
+                            <i class="fa-solid fa-landmark"></i>
+                            <h4>Parque Desportivo de Ançã</h4>
+                            <p>Casa oficial das nossas equipas de seniores e camadas jovens.</p>
+                            <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="btn btn-sm btn-light"><i class="fa-solid fa-map-location-dot"></i> Ver no Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: FUTEBOL & FORMAÇÃO -->
+        <section id="view-futebol" class="view-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Futebol & Formação</h2>
+                    <p>Da Equipa Sénior aos escalões de base</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card-item">
+                        <div class="card-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3>Equipa Sénior</h3>
+                        <p>A disputar os campeonatos distritais da AF Coimbra com garra, união e espírito alviverde rumo aos lugares de topo.</p>
+                        <button class="btn btn-sm btn-outline mt-3" onclick="switchView('noticias')">Ver Plantel & Jogos</button>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-icon"><i class="fa-solid fa-children"></i></div>
+                        <h3>Escola de Formação</h3>
+                        <p>Dos Petizes aos Juniores, educamos através do desporto, incutindo valores de fair-play, amizade e dedicação.</p>
+                        <button class="btn btn-sm btn-outline mt-3" onclick="switchView('socios')">Inscrever Atleta</button>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <h3>Calendário Geral</h3>
+                        <p>Consulta todos os horários de treinos e jornadas do próximo fim de semana no Campo Dr. Américo Couto.</p>
+                        <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="btn btn-sm btn-outline mt-3"><i class="fa-solid fa-map"></i> Como Chegar ao Campo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: SÓCIOS & BILHETEIRA -->
+        <section id="view-socios" class="view-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Campanha de Sócios & Bilheteira</h2>
+                    <p>Sê parte da família alviverde e apoia o Ançã F.C.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Sócio Jovem / Sub-18</h3>
+                            <div class="price">5€ <span>/ mês</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fa-solid fa-check"></i> Entrada livre nos jogos em casa</li>
+                            <li><i class="fa-solid fa-check"></i> Desconto na Loja Oficial</li>
+                            <li><i class="fa-solid fa-check"></i> Direito a voto em assembleia (se aplicável)</li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" onclick="openCheckout('Sócio Jovem (Mensalidade)', 5.00)">Aderir Agora</button>
+                    </div>
+                    <div class="price-card popular">
+                        <div class="badge-pop">Mais Popular</div>
+                        <div class="price-header">
+                            <h3>Sócio Efetivo Anual</h3>
+                            <div class="price">60€ <span>/ ano</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fa-solid fa-check"></i> Cartão de Sócio Oficial Alviverde</li>
+                            <li><i class="fa-solid fa-check"></i> Acesso total a todos os jogos caseiros</li>
+                            <li><i class="fa-solid fa-check"></i> 15% de desconto em merchandising</li>
+                            <li><i class="fa-solid fa-check"></i> Participação ativa no clube</li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" onclick="openCheckout('Sócio Efetivo Anual', 60.00)">Tornar-me Efetivo</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h3>Bilhete Jogo Singular</h3>
+                            <div class="price">6€ <span>/ jogo</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fa-solid fa-check"></i> Acesso à bancada coberta/descoberta</li>
+                            <li><i class="fa-solid fa-check"></i> Jogo oficial no Parque Desportivo de Ançã</li>
+                            <li><i class="fa-solid fa-check"></i> Emissão imediata de bilhete digital</li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" onclick="openCheckout('Bilhete Jogo Único', 6.00)">Comprar Bilhete</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: LOJA OFICIAL -->
+        <section id="view-loja" class="view-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Loja Oficial Alviverde</h2>
+                    <p>Viste as cores do Ançã FC com orgulho</p>
+                </div>
+                <div class="store-grid">
+                    <div class="store-item">
+                        <div class="store-img-placeholder"><i class="fa-solid fa-shirt"></i></div>
+                        <h4>Camisola Oficial Principal 25/26</h4>
+                        <span class="price-tag">45.00 €</span>
+                        <p>Equipamento listrado verde e branco oficial.</p>
+                        <button class="btn btn-sm btn-primary mt-2" onclick="openCheckout('Camisola Oficial Principal 25/26', 45.00)"><i class="fa-solid fa-cart-shopping"></i> Comprar</button>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-img-placeholder"><i class="fa-solid fa-shirt"></i></div>
+                        <h4>Equipamento Alternativo</h4>
+                        <span class="price-tag">45.00 €</span>
+                        <p>Design moderno para os jogos fora de portas.</p>
+                        <button class="btn btn-sm btn-primary mt-2" onclick="openCheckout('Equipamento Alternativo', 45.00)"><i class="fa-solid fa-cart-shopping"></i> Comprar</button>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-img-placeholder"><i class="fa-solid fa-scarf"></i></div>
+                        <h4>Cachecol Alviverde Oficial</h4>
+                        <span class="price-tag">12.50 €</span>
+                        <p>Ideal para apoiar a equipa na bancada.</p>
+                        <button class="btn btn-sm btn-primary mt-2" onclick="openCheckout('Cachecol Alviverde Oficial', 12.50)"><i class="fa-solid fa-cart-shopping"></i> Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: NOTÍCIAS -->
+        <section id="view-noticias" class="view-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Últimas Notícias</h2>
+                    <p>Acompanha tudo o que acontece no universo do Ançã FC</p>
+                </div>
+                <div class="grid-3">
+                    <div class="news-card" onclick="openNewsModal('Assembleia Geral Ordinária Convocatória', 'O Ançã Futebol Clube convoca todos os seus associados para a Assembleia Geral Ordinária a realizar na sede social no próximo dia 30 de março pelas 20:30 horas, com a seguinte ordem de trabalhos: 1. Apreciação e votação do relatório e contas; 2. Outros assuntos de interesse.')">
+                        <div class="news-thumb"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div class="news-body">
+                            <span class="news-date">18 Março 2026</span>
+                            <h4>Assembleia Geral Ordinária Convocatória</h4>
+                            <p>Convocatória oficial dirigida a todos os sócios efetivos para discussão das contas e futuro do clube.</p>
+                            <span class="read-more">Ler artigo &rarr;</span>
+                        </div>
+                    </div>
+                    <div class="news-card" onclick="openNewsModal('Inauguração do Novo Relvado Sintético nos Escalões de Formação', 'É com enorme orgulho que o Ançã FC anuncia a conclusão das melhorias no complexo de treinos, oferecendo melhores condições para os mais de 300 atletas da formação.')">
+                        <div class="news-thumb"><i class="fa-solid fa-futbol"></i></div>
+                        <div class="news-body">
+                            <span class="news-date">10 Março 2026</span>
+                            <h4>Novas Condições na Formação Alviverde</h4>
+                            <p>Investimento contínuo na qualidade dos treinos e bem-estar dos nossos jovens atletas da vila de Ançã.</p>
+                            <span class="read-more">Ler artigo &rarr;</span>
+                        </div>
+                    </div>
+                    <div class="news-card" onclick="openNewsModal('Antevisão do Dérbi: Ançã FC vs UD Tocha', 'Técnico e plantel preparam com máxima concentração o embate decisivo deste fim de semana no Campo Dr. Américo Couto. Contamos com o apoio incansável dos adeptos!')">
+                        <div class="news-thumb"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="news-body">
+                            <span class="news-date">05 Março 2026</span>
+                            <h4>Antevisão do Dérbi Distrital</h4>
+                            <p>Preparação intensa para o jogo grande da jornada com forte mobilização da massa associativa.</p>
+                            <span class="read-more">Ler artigo &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <span class="club-title">Ançã F.C.</span>
+                </div>
+                <p>O clube do coração de toda a vila de Ançã e do concelho de Cantanhede. Fundado em 1932.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#" onclick="switchView('clube')">O Clube & História</a></li>
+                    <li><a href="#" onclick="switchView('futebol')">Futebol & Formação</a></li>
+                    <li><a href="#" onclick="switchView('socios')">Quotas de Sócio</a></li>
+                    <li><a href="#" onclick="switchView('loja')">Loja Oficial</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contactos & Localização</h4>
+                <p><i class="fa-solid fa-location-dot"></i> <a href="https://maps.google.com/?q=Parque+Desportivo+de+Anca" target="_blank" class="footer-map-link">Parque Desportivo de Ançã, 3060-012 Ançã</a></p>
+                <p><i class="fa-solid fa-phone"></i> +351 239 000 000</p>
+                <p><i class="fa-solid fa-envelope"></i> geral@ancafc.pt</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Ançã Futebol Clube. Todos os direitos reservados. Feito com orgulho Alviverde.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CHECKOUT / PAGAMENTO COM MÉTODOS MÚLTIPLOS -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeCheckout()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header-box">
+                <i class="fa-solid fa-lock"></i>
+                <h3>Tesouraria Digital Ançã FC</h3>
+                <p id="checkoutItemTitle">Item Selecionado</p>
+            </div>
+            
+            <div class="checkout-body" id="checkoutBodyForm">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="buyerName" placeholder="Insira o seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label>Endereço de E-mail</label>
+                    <input type="email" id="buyerEmail" placeholder="exemplo@dominio.pt" required>
+                </div>
+
+                <label class="payment-method-label">Escolha o Método de Pagamento:</label>
+                <div class="payment-options">
+                    <label class="pay-option selected" onclick="selectPaymentMethod('mbway', this)">
+                        <input type="radio" name="paymethod" checked>
+                        <span><i class="fa-solid fa-mobile-screen"></i> MB WAY</span>
+                    </label>
+                    <label class="pay-option" onclick="selectPaymentMethod('multibanco', this)">
+                        <input type="radio" name="paymethod">
+                        <span><i class="fa-solid fa-building-columns"></i> Multibanco</span>
+                    </label>
+                    <label class="pay-option" onclick="selectPaymentMethod('paypal', this)">
+                        <input type="radio" name="paymethod">
+                        <span><i class="fa-brands fa-paypal"></i> PayPal</span>
+                    </label>
+                    <label class="pay-option" onclick="selectPaymentMethod('card', this)">
+                        <input type="radio" name="paymethod">
+                        <span><i class="fa-solid fa-credit-card"></i> Cartão Bancário</span>
+                    </label>
+                </div>
+
+                <!-- Campos dinâmicos MB WAY -->
+                <div id="paymentDetailsMBWay" class="payment-details-box">
+                    <label>Número de Telemóvel MB WAY (+351)</label>
+                    <input type="tel" id="mbwayPhone" placeholder="912345678" maxlength="9">
+                    <small>Iremos enviar uma notificação instantânea para a sua aplicação MB WAY.</small>
+                </div>
+
+                <!-- Campos dinâmicos Multibanco -->
+                <div id="paymentDetailsMultibanco" class="payment-details-box" style="display:none;">
+                    <div class="mb-ref-box">
+                        <p><strong>Entidade:</strong> 21800</p>
+                        <p><strong>Referência:</strong> 948 271 005</p>
+                        <p><strong>Montante:</strong> <span id="mbAmountVal">6.00 €</span></p>
+                    </div>
+                    <small>Pode pagar em qualquer Caixa Automática ou Homebanking.</small>
+                </div>
+
+                <!-- Campos dinâmicos Cartão -->
+                <div id="paymentDetailsCard" class="payment-details-box" style="display:none;">
+                    <label>Número do Cartão</label>
+                    <input type="text" placeholder="4532 •••• •••• 8901">
+                    <div class="row-inputs">
+                        <div>
+                            <label>Validade</label>
+                            <input type="text" placeholder="MM/AA">
+                        </div>
+                        <div>
+                            <label>CVV</label>
+                            <input type="password" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos dinâmicos PayPal -->
+                <div id="paymentDetailsPaypal" class="payment-details-box" style="display:none;">
+                    <p style="text-align: center; color: #555; padding: 10px 0;">Será redirecionado de forma segura para autorizar o pagamento na sua conta PayPal.</p>
+                </div>
+
+                <div class="checkout-total-row">
+                    <span>Total a Pagar:</span>
+                    <strong id="checkoutTotalPrice">6.00 €</strong>
+                </div>
+
+                <button class="btn btn-primary btn-block mt-3" onclick="processPayment()"><i class="fa-solid fa-shield-check"></i> Confirmar & Pagar com Segurança</button>
+            </div>
+
+            <!-- Recibo de Sucesso -->
+            <div id="checkoutSuccessReceipt" class="receipt-box" style="display:none;">
+                <div class="receipt-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>Pagamento Efetuado com Sucesso!</h3>
+                <p>Obrigado por apoiar o Ançã Futebol Clube. O seu recibo digital e comprovativo foram gerados.</p>
+                <div class="receipt-details">
+                    <p><strong>Transação ID:</strong> #AFC-892143</p>
+                    <p><strong>Comprador:</strong> <span id="receiptName"></span></p>
+                    <p><strong>Artigo:</strong> <span id="receiptItem"></span></p>
+                    <p><strong>Valor:</strong> <span id="receiptPrice"></span></p>
+                    <p><strong>Estado:</strong> Confirmado & Liquidado</p>
+                </div>
+                <button class="btn btn-outline btn-block mt-3" onclick="closeCheckout()"><i class="fa-solid fa-check"></i> Concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE LEITURA DE NOTÍCIAS -->
+    <div class="modal-overlay" id="newsModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeNewsModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="newsModalTitle" style="color: #007A43; margin-bottom: 15px;"></h3>
+            <p id="newsModalBody" style="line-height: 1.6; color: #444; font-size: 1.05rem;"></p>
+            <button class="btn btn-primary btn-block mt-4" onclick="closeNewsModal()">Fechar Leitura</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT JS -->
+    <script src="app.js"></script>
+</body>
+</html>
